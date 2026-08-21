@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 import PublicLayoutWrapper from "@/components/PublicLayoutWrapper";
 import { getCompanies, getLatest } from "@/lib/data";
-
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata: Metadata = {
   title: "ForecastPH | Educational Stock Forecasting",
@@ -32,7 +29,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           }}
         />
       </head>
-      <body className={`${inter.variable} bg-dark-bg text-slate-300 font-sans antialiased overflow-x-hidden min-h-screen flex flex-col`}>
+      <body className="bg-dark-bg text-slate-300 font-sans antialiased overflow-x-hidden min-h-screen flex flex-col">
         <PublicLayoutWrapper companies={companies} latest={latest}>
           {children}
         </PublicLayoutWrapper>
