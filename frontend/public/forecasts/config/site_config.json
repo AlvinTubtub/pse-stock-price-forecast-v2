@@ -1,0 +1,210 @@
+{
+  "version": 4,
+  "lastUpdated": "2026-08-21T11:44:24.850Z",
+  "updatedBy": "admin1",
+  "layoutMode": "standard",
+  "features": {
+    "aiAssistant": true,
+    "compareCompanies": true,
+    "sectorOverview": true,
+    "forecastHistory": true,
+    "historicalOhlcv": true,
+    "nextDayPrediction": true,
+    "backtest": true,
+    "forecastError": true,
+    "modelPerformance": true,
+    "learnStocks": true
+  },
+  "navigation": [
+    {
+      "id": "home",
+      "href": "/",
+      "label": "Home",
+      "visible": true,
+      "isImmutable": true
+    },
+    {
+      "id": "companies",
+      "href": "/companies",
+      "label": "Companies",
+      "visible": true
+    },
+    {
+      "id": "compare-companies",
+      "href": "/compare-companies",
+      "label": "Compare",
+      "visible": true
+    },
+    {
+      "id": "sectors",
+      "href": "/sectors",
+      "label": "Sectors",
+      "visible": true
+    },
+    {
+      "id": "forecast-history",
+      "href": "/forecast-history",
+      "label": "History",
+      "visible": true
+    },
+    {
+      "id": "compare",
+      "href": "/compare",
+      "label": "Models",
+      "visible": true
+    },
+    {
+      "id": "learn",
+      "href": "/learn",
+      "label": "Learn",
+      "visible": true
+    },
+    {
+      "id": "about",
+      "href": "/about",
+      "label": "About",
+      "visible": true
+    }
+  ],
+  "content": {
+    "heroTitle": "Next-Day Stock Forecasting for the Philippine Stock Exchange",
+    "heroDescription": "Transparent, machine-learning powered price estimations and backtest accuracy metrics for 15 major PSE-listed equities.",
+    "dataSourceText": "Official PSE Daily Quotations Reports (EOD)",
+    "disclaimerText": "ForecastPH is an academic capstone research project. Forecasts and metrics are strictly educational decision-support tools and do NOT constitute financial advice, buy/sell recommendations, or guaranteed investment targets.",
+    "announcement": {
+      "enabled": false,
+      "text": "Welcome to ForecastPH — All forecasts updated with the latest PSE trading session settlement.",
+      "type": "info"
+    }
+  },
+  "companies": {
+    "ALI": {
+      "symbol": "ALI",
+      "visible": true,
+      "featured": true,
+      "order": 1
+    },
+    "APX": {
+      "symbol": "APX",
+      "visible": true,
+      "featured": true,
+      "order": 2
+    },
+    "BPI": {
+      "symbol": "BPI",
+      "visible": true,
+      "featured": true,
+      "order": 3
+    },
+    "GLO": {
+      "symbol": "GLO",
+      "visible": true,
+      "featured": true,
+      "order": 4
+    },
+    "ICT": {
+      "symbol": "ICT",
+      "visible": true,
+      "featured": false,
+      "order": 5
+    },
+    "JFC": {
+      "symbol": "JFC",
+      "visible": true,
+      "featured": false,
+      "order": 6
+    },
+    "MBT": {
+      "symbol": "MBT",
+      "visible": true,
+      "featured": false,
+      "order": 7
+    },
+    "MEG": {
+      "symbol": "MEG",
+      "visible": true,
+      "featured": false,
+      "order": 8
+    },
+    "MER": {
+      "symbol": "MER",
+      "visible": true,
+      "featured": false,
+      "order": 9
+    },
+    "NIKL": {
+      "symbol": "NIKL",
+      "visible": true,
+      "featured": false,
+      "order": 10
+    },
+    "PGOLD": {
+      "symbol": "PGOLD",
+      "visible": true,
+      "featured": false,
+      "order": 11
+    },
+    "SCC": {
+      "symbol": "SCC",
+      "visible": true,
+      "featured": false,
+      "order": 12
+    },
+    "SECB": {
+      "symbol": "SECB",
+      "visible": true,
+      "featured": false,
+      "order": 13
+    },
+    "SHLPH": {
+      "symbol": "SHLPH",
+      "visible": true,
+      "featured": false,
+      "order": 14
+    },
+    "SMPH": {
+      "symbol": "SMPH",
+      "visible": true,
+      "featured": false,
+      "order": 15
+    }
+  },
+  "forecastPublication": {
+    "ALI": "published",
+    "APX": "published",
+    "BPI": "published",
+    "GLO": "published",
+    "ICT": "published",
+    "JFC": "published",
+    "MBT": "published",
+    "MEG": "published",
+    "MER": "published",
+    "NIKL": "published",
+    "PGOLD": "published",
+    "SCC": "published",
+    "SECB": "published",
+    "SHLPH": "published",
+    "SMPH": "published"
+  },
+  "models": {
+    "arima": {
+      "enabled": true,
+      "lastTrained": "2026-08-19"
+    },
+    "lag_reg": {
+      "enabled": true,
+      "lastTrained": "2026-08-19"
+    },
+    "lstm": {
+      "enabled": true,
+      "lastTrained": "2026-08-19"
+    }
+  },
+  "ai": {
+    "enabled": true,
+    "primaryModel": "gemini-2.5-flash",
+    "fallbackModel": "gemini-2.5-flash-lite",
+    "customGuidelines": "Strictly adhere to educational explanations. Do not provide financial advice, buy/sell recommendations, or price guarantees."
+  },
+  "customHolidays": []
+}

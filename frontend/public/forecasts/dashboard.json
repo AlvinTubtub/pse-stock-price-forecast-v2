@@ -1,0 +1,59 @@
+{
+  "generatedAt": "2026-08-19T16:01:51.936587+08:00",
+  "forecastDate": "2026-08-20",
+  "lastRunAt": "2026-08-19T08:01:47+00:00",
+  "status": "ok",
+  "totalCompanies": 15,
+  "missingCompanies": [],
+  "sectors": [
+    {
+      "name": "Financials",
+      "count": 3
+    },
+    {
+      "name": "Industrial",
+      "count": 3
+    },
+    {
+      "name": "Mining and Oil",
+      "count": 3
+    },
+    {
+      "name": "Property",
+      "count": 3
+    },
+    {
+      "name": "Services",
+      "count": 3
+    }
+  ],
+  "marketSummary": {
+    "gainers": 3,
+    "losers": 9,
+    "unchanged": 3
+  },
+  "topGainer": {
+    "symbol": "ICT",
+    "name": "Intl. Container Terminal Services",
+    "sector": "Services",
+    "latestClose": 930.0,
+    "predictedClose": 936.96,
+    "pctChange": 0.75,
+    "direction": "bullish",
+    "bestModel": "ARIMA",
+    "confidence": 98.9,
+    "forecastDate": "2026-08-20"
+  },
+  "topLoser": {
+    "symbol": "APX",
+    "name": "Apex Mining Co., Inc.",
+    "sector": "Mining and Oil",
+    "latestClose": 14.26,
+    "predictedClose": 14.2,
+    "pctChange": -0.42,
+    "direction": "bearish",
+    "bestModel": "Lag-Informed Regression",
+    "confidence": 96.8,
+    "forecastDate": "2026-08-20"
+  }
+}

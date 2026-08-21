@@ -1,0 +1,27 @@
+{
+  "last_run_at": "2026-08-19T08:01:47+00:00",
+  "status": "ok",
+  "duration_seconds": 1.88,
+  "pdf_count": 1,
+  "record_count": 15,
+  "symbols_updated": [
+    "ALI",
+    "APX",
+    "BPI",
+    "GLO",
+    "ICT",
+    "JFC",
+    "MBT",
+    "MEG",
+    "MER",
+    "NIKL",
+    "PGOLD",
+    "SCC",
+    "SECB",
+    "SHLPH",
+    "SMPH"
+  ],
+  "best_models_updated": 0,
+  "triggered_by": "repository_dispatch",
+  "error": null
+}

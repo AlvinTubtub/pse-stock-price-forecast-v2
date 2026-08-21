@@ -1,0 +1,83 @@
+[
+  {
+    "id": "audit-1787312664851-n7jxt",
+    "timestamp": "2026-08-21T11:44:24.851Z",
+    "username": "admin1",
+    "action": "Saved & Published Configuration",
+    "target": "Site Configuration",
+    "result": "success",
+    "details": "Updated public navigation ordering and link visibility."
+  },
+  {
+    "id": "audit-1787312648749-qnatl",
+    "timestamp": "2026-08-21T11:44:08.749Z",
+    "username": "admin1",
+    "action": "Saved & Published Configuration",
+    "target": "Site Configuration",
+    "result": "success",
+    "details": "Updated public navigation ordering and link visibility."
+  },
+  {
+    "id": "audit-1787312625754-z3r3a",
+    "timestamp": "2026-08-21T11:43:45.754Z",
+    "username": "admin1",
+    "action": "Saved & Published Configuration",
+    "target": "Site Configuration",
+    "result": "success",
+    "details": "Updated frontend feature toggles and layout mode (STANDARD)."
+  },
+  {
+    "id": "audit-1787312603787-94wpa",
+    "timestamp": "2026-08-21T11:43:23.787Z",
+    "username": "admin1",
+    "action": "Saved & Published Configuration",
+    "target": "Site Configuration",
+    "result": "success",
+    "details": "Updated frontend feature toggles and layout mode (BEGINNER)."
+  },
+  {
+    "id": "audit-1787312577552-4vvcp",
+    "timestamp": "2026-08-21T11:42:57.552Z",
+    "username": "admin1",
+    "action": "Saved & Published Configuration",
+    "target": "Site Configuration",
+    "result": "success",
+    "details": "Updated frontend feature toggles and layout mode (ADVANCED)."
+  },
+  {
+    "id": "audit-1787312560574-82gju",
+    "timestamp": "2026-08-21T11:42:40.574Z",
+    "username": "admin1",
+    "action": "Saved & Published Configuration",
+    "target": "Site Configuration",
+    "result": "success",
+    "details": "Updated AI Assistant configuration (Status: ENABLED)."
+  },
+  {
+    "id": "audit-1787312549854-8986z",
+    "timestamp": "2026-08-21T11:42:29.854Z",
+    "username": "admin1",
+    "action": "Saved & Published Configuration",
+    "target": "Site Configuration",
+    "result": "success",
+    "details": "Updated AI Assistant configuration (Status: DISABLED)."
+  },
+  {
+    "id": "audit-1787312048543-wsn8t",
+    "timestamp": "2026-08-21T11:34:08.543Z",
+    "username": "admin1",
+    "action": "Administrator Login",
+    "target": "Admin Portal",
+    "result": "success",
+    "details": "Successfully authenticated into admin session."
+  },
+  {
+    "id": "audit-init-1",
+    "timestamp": "2026-08-20T11:34:08.539Z",
+    "username": "system",
+    "action": "System Initialization",
+    "target": "ForecastPH Admin",
+    "result": "success",
+    "details": "Initialized default administrative configuration"
+  }
+]
