@@ -4,11 +4,11 @@
     "name": "Security Bank Corporation",
     "sector": "Financials",
     "latestClose": 66.0,
-    "predictedClose": 65.99,
-    "pctChange": -0.02,
+    "predictedClose": 65.94,
+    "pctChange": -0.09,
     "direction": "bearish",
-    "bestModel": "ARIMA",
-    "confidence": 90.1,
+    "bestModel": "Lag-Informed Regression",
+    "confidence": 90.4,
     "forecastDate": "2026-08-20"
   },
   {
@@ -20,7 +20,7 @@
     "pctChange": -0.09,
     "direction": "bearish",
     "bestModel": "ARIMA",
-    "confidence": 94.0,
+    "confidence": 93.9,
     "forecastDate": "2026-08-20"
   },
   {
@@ -28,11 +28,11 @@
     "name": "Metropolitan Bank & Trust Co.",
     "sector": "Financials",
     "latestClose": 67.45,
-    "predictedClose": 67.69,
-    "pctChange": 0.36,
+    "predictedClose": 67.67,
+    "pctChange": 0.33,
     "direction": "bullish",
     "bestModel": "Lag-Informed Regression",
-    "confidence": 86.8,
+    "confidence": 86.6,
     "forecastDate": "2026-08-20"
   },
   {
@@ -40,11 +40,11 @@
     "name": "Manila Electric Company",
     "sector": "Industrial",
     "latestClose": 489.2,
-    "predictedClose": 489.09,
-    "pctChange": -0.02,
-    "direction": "bearish",
+    "predictedClose": 489.92,
+    "pctChange": 0.15,
+    "direction": "bullish",
     "bestModel": "Lag-Informed Regression",
-    "confidence": 92.4,
+    "confidence": 92.8,
     "forecastDate": "2026-08-20"
   },
   {
@@ -52,11 +52,11 @@
     "name": "Jollibee Foods Corporation",
     "sector": "Industrial",
     "latestClose": 154.8,
-    "predictedClose": 154.77,
-    "pctChange": -0.02,
-    "direction": "bearish",
-    "bestModel": "Lag-Informed Regression",
-    "confidence": 98.3,
+    "predictedClose": 155.17,
+    "pctChange": 0.24,
+    "direction": "bullish",
+    "bestModel": "ARIMA",
+    "confidence": 98.4,
     "forecastDate": "2026-08-20"
   },
   {
@@ -80,7 +80,7 @@
     "pctChange": 0.0,
     "direction": "bullish",
     "bestModel": "LSTM",
-    "confidence": 90.8,
+    "confidence": 91.9,
     "forecastDate": "2026-08-20"
   },
   {
@@ -91,8 +91,8 @@
     "predictedClose": 15.28,
     "pctChange": -0.13,
     "direction": "bearish",
-    "bestModel": "ARIMA",
-    "confidence": 98.7,
+    "bestModel": "Lag-Informed Regression",
+    "confidence": 98.6,
     "forecastDate": "2026-08-20"
   },
   {
@@ -100,11 +100,11 @@
     "name": "SM Prime Holdings, Inc.",
     "sector": "Property",
     "latestClose": 18.3,
-    "predictedClose": 18.29,
-    "pctChange": -0.05,
+    "predictedClose": 18.26,
+    "pctChange": -0.22,
     "direction": "bearish",
-    "bestModel": "ARIMA",
-    "confidence": 95.3,
+    "bestModel": "Lag-Informed Regression",
+    "confidence": 95.4,
     "forecastDate": "2026-08-20"
   },
   {
@@ -112,11 +112,11 @@
     "name": "Globe Telecom, Inc.",
     "sector": "Services",
     "latestClose": 1735.0,
-    "predictedClose": 1734.77,
+    "predictedClose": 1734.9,
     "pctChange": -0.01,
     "direction": "bearish",
-    "bestModel": "ARIMA",
-    "confidence": 94.3,
+    "bestModel": "Lag-Informed Regression",
+    "confidence": 94.4,
     "forecastDate": "2026-08-20"
   },
   {
@@ -136,8 +136,8 @@
     "name": "Intl. Container Terminal Services",
     "sector": "Services",
     "latestClose": 930.0,
-    "predictedClose": 936.96,
-    "pctChange": 0.75,
+    "predictedClose": 936.85,
+    "pctChange": 0.74,
     "direction": "bullish",
     "bestModel": "ARIMA",
     "confidence": 98.9,
@@ -148,11 +148,11 @@
     "name": "Apex Mining Co., Inc.",
     "sector": "Mining and Oil",
     "latestClose": 14.26,
-    "predictedClose": 14.2,
-    "pctChange": -0.42,
+    "predictedClose": 14.19,
+    "pctChange": -0.49,
     "direction": "bearish",
     "bestModel": "Lag-Informed Regression",
-    "confidence": 96.8,
+    "confidence": 96.5,
     "forecastDate": "2026-08-20"
   },
   {
@@ -164,7 +164,7 @@
     "pctChange": 0.0,
     "direction": "bullish",
     "bestModel": "ARIMA",
-    "confidence": 95.2,
+    "confidence": 95.0,
     "forecastDate": "2026-08-20"
   },
   {
@@ -176,7 +176,7 @@
     "pctChange": -0.17,
     "direction": "bearish",
     "bestModel": "ARIMA",
-    "confidence": 96.6,
+    "confidence": 96.8,
     "forecastDate": "2026-08-20"
   }
 ]

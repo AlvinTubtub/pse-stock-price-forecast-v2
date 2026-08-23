@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-19T16:01:51.936587+08:00",
+  "generatedAt": "2026-08-23T12:20:45.216260+08:00",
   "forecastDate": "2026-08-20",
   "lastRunAt": "2026-08-19T08:01:47+00:00",
   "status": "ok",
@@ -28,8 +28,8 @@
     }
   ],
   "marketSummary": {
-    "gainers": 3,
-    "losers": 9,
+    "gainers": 5,
+    "losers": 7,
     "unchanged": 3
   },
   "topGainer": {
@@ -37,8 +37,8 @@
     "name": "Intl. Container Terminal Services",
     "sector": "Services",
     "latestClose": 930.0,
-    "predictedClose": 936.96,
-    "pctChange": 0.75,
+    "predictedClose": 936.85,
+    "pctChange": 0.74,
     "direction": "bullish",
     "bestModel": "ARIMA",
     "confidence": 98.9,
@@ -49,11 +49,11 @@
     "name": "Apex Mining Co., Inc.",
     "sector": "Mining and Oil",
     "latestClose": 14.26,
-    "predictedClose": 14.2,
-    "pctChange": -0.42,
+    "predictedClose": 14.19,
+    "pctChange": -0.49,
     "direction": "bearish",
     "bestModel": "Lag-Informed Regression",
-    "confidence": 96.8,
+    "confidence": 96.5,
     "forecastDate": "2026-08-20"
   }
 }
