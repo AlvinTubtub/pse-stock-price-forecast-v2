@@ -2,11 +2,11 @@
   "symbol": "GLO",
   "name": "Globe Telecom, Inc.",
   "sector": "Services",
-  "previousClose": 1735.0,
+  "previousClose": 1694.0,
   "predictedClose": 1734.9,
-  "pesoChange": -0.1,
-  "pctChange": -0.01,
-  "direction": "bearish",
+  "pesoChange": 40.9,
+  "pctChange": 2.41,
+  "direction": "bullish",
   "model": "Lag-Informed Regression",
   "confidence": 94.4,
   "metrics": {
@@ -12985,11 +12985,25 @@
       "low": 1723.0,
       "close": 1735.0,
       "volume": 78518645
+    },
+    {
+      "date": "2026-08-20",
+      "open": 1735.0,
+      "high": 1757.0,
+      "low": 1735.0,
+      "close": 1748.0,
+      "volume": 36498695
+    },
+    {
+      "date": "2026-08-24",
+      "open": 1748.0,
+      "high": 1748.0,
+      "low": 1681.0,
+      "close": 1694.0,
+      "volume": 141754690
     }
   ],
   "backtestDates": [
-    "2026-05-26",
-    "2026-05-28",
     "2026-05-29",
     "2026-06-01",
     "2026-06-02",
@@ -13047,11 +13061,11 @@
     "2026-08-14",
     "2026-08-17",
     "2026-08-18",
-    "2026-08-19"
+    "2026-08-19",
+    "2026-08-20",
+    "2026-08-24"
   ],
   "backtestActual": [
-    1710.0,
-    1675.0,
     1690.0,
     1699.0,
     1700.0,
@@ -13109,7 +13123,9 @@
     1750.0,
     1721.0,
     1740.0,
-    1735.0
+    1735.0,
+    1748.0,
+    1694.0
   ],
   "backtestByModel": {
     "Lag-Informed Regression": [
@@ -13299,8 +13315,6 @@
       1812.4157257080078
     ],
     "Naive baseline": [
-      1740.0,
-      1710.0,
       1675.0,
       1690.0,
       1699.0,
@@ -13358,10 +13372,12 @@
       1734.0,
       1750.0,
       1721.0,
-      1740.0
+      1740.0,
+      1735.0,
+      1748.0
     ]
   },
-  "forecastDate": "2026-08-20",
+  "forecastDate": "2026-08-25",
   "dataAsOf": null,
   "inferenceAt": null
 }

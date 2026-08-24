@@ -2,11 +2,11 @@
   "symbol": "BPI",
   "name": "Bank of the Philippine Islands",
   "sector": "Financials",
-  "previousClose": 107.4,
+  "previousClose": 106.1,
   "predictedClose": 107.3,
-  "pesoChange": -0.1,
-  "pctChange": -0.09,
-  "direction": "bearish",
+  "pesoChange": 1.2,
+  "pctChange": 1.13,
+  "direction": "bullish",
   "model": "ARIMA",
   "confidence": 93.9,
   "metrics": {
@@ -12985,11 +12985,25 @@
       "low": 104.2,
       "close": 107.4,
       "volume": 121823693
+    },
+    {
+      "date": "2026-08-20",
+      "open": 106.6,
+      "high": 107.6,
+      "low": 105.8,
+      "close": 107.3,
+      "volume": 96565112
+    },
+    {
+      "date": "2026-08-24",
+      "open": 107.3,
+      "high": 107.8,
+      "low": 106.0,
+      "close": 106.1,
+      "volume": 220627124
     }
   ],
   "backtestDates": [
-    "2026-05-26",
-    "2026-05-28",
     "2026-05-29",
     "2026-06-01",
     "2026-06-02",
@@ -13047,11 +13061,11 @@
     "2026-08-14",
     "2026-08-17",
     "2026-08-18",
-    "2026-08-19"
+    "2026-08-19",
+    "2026-08-20",
+    "2026-08-24"
   ],
   "backtestActual": [
-    92.0,
-    90.35,
     93.9,
     93.5,
     93.0,
@@ -13109,7 +13123,9 @@
     104.0,
     106.9,
     107.5,
-    107.4
+    107.4,
+    107.3,
+    106.1
   ],
   "backtestByModel": {
     "Lag-Informed Regression": [
@@ -13299,8 +13315,6 @@
       103.77488994598389
     ],
     "Naive baseline": [
-      91.1,
-      92.0,
       90.35,
       93.9,
       93.5,
@@ -13358,10 +13372,12 @@
       106.9,
       104.0,
       106.9,
-      107.5
+      107.5,
+      107.4,
+      107.3
     ]
   },
-  "forecastDate": "2026-08-20",
+  "forecastDate": "2026-08-25",
   "dataAsOf": null,
   "inferenceAt": null
 }

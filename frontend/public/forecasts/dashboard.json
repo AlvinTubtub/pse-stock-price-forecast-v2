@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-08-23T12:20:45.216260+08:00",
-  "forecastDate": "2026-08-20",
-  "lastRunAt": "2026-08-19T08:01:47+00:00",
+  "generatedAt": "2026-08-24T18:23:53.102936+08:00",
+  "forecastDate": "2026-08-25",
+  "lastRunAt": "2026-08-24T10:23:52+00:00",
   "status": "ok",
   "totalCompanies": 15,
   "missingCompanies": [],
@@ -28,32 +28,32 @@
     }
   ],
   "marketSummary": {
-    "gainers": 5,
-    "losers": 7,
-    "unchanged": 3
+    "gainers": 7,
+    "losers": 8,
+    "unchanged": 0
   },
   "topGainer": {
-    "symbol": "ICT",
-    "name": "Intl. Container Terminal Services",
-    "sector": "Services",
-    "latestClose": 930.0,
-    "predictedClose": 936.85,
-    "pctChange": 0.74,
+    "symbol": "SHLPH",
+    "name": "Pilipinas Shell Petroleum Corp.",
+    "sector": "Industrial",
+    "latestClose": 8.21,
+    "predictedClose": 8.44,
+    "pctChange": 2.8,
     "direction": "bullish",
     "bestModel": "ARIMA",
-    "confidence": 98.9,
-    "forecastDate": "2026-08-20"
+    "confidence": 97.8,
+    "forecastDate": "2026-08-25"
   },
   "topLoser": {
     "symbol": "APX",
     "name": "Apex Mining Co., Inc.",
     "sector": "Mining and Oil",
-    "latestClose": 14.26,
+    "latestClose": 16.26,
     "predictedClose": 14.19,
-    "pctChange": -0.49,
+    "pctChange": -12.73,
     "direction": "bearish",
     "bestModel": "Lag-Informed Regression",
     "confidence": 96.5,
-    "forecastDate": "2026-08-20"
+    "forecastDate": "2026-08-25"
   }
 }
