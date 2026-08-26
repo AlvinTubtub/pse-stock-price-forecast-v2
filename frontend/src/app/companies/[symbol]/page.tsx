@@ -13,6 +13,8 @@ import { getAllSymbols, getCompanyDetail } from "@/lib/data";
 import { getSiteConfig } from "@/lib/admin/config";
 import { formatDate, formatNum, formatPeso, formatPct } from "@/lib/format";
 
+export const dynamic = "force-dynamic";
+
 export async function generateStaticParams() {
   const symbols = await getAllSymbols();
   return symbols.map((symbol) => ({ symbol }));

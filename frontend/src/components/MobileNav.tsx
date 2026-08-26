@@ -17,7 +17,7 @@ export default function MobileNav() {
   const [features, setFeatures] = useState<FeatureFlags | null>(null);
 
   useEffect(() => {
-    fetch("/forecasts/config/site_config.json")
+    fetch("/api/public/config", { cache: "no-store" })
       .then((r) => r.json())
       .then((data) => {
         if (data?.features) setFeatures(data.features);

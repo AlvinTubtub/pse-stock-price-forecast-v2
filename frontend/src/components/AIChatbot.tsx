@@ -91,12 +91,19 @@ export default function AIChatbot() {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
+  const [customQuestionsMap, setCustomQuestionsMap] = useState<Record<string, string[]> | null>(null);
+
   useEffect(() => {
-    fetch("/forecasts/config/site_config.json")
+    fetch("/api/public/config", { cache: "no-store" })
       .then((r) => r.json())
       .then((data) => {
-        if (data?.features?.aiAssistant === false) {
+        if (data?.ai?.enabled === false || data?.features?.aiAssistant === false) {
           setIsEnabled(false);
+        } else {
+          setIsEnabled(true);
+        }
+        if (data?.ai?.starterQuestions && typeof data.ai.starterQuestions === "object") {
+          setCustomQuestionsMap(data.ai.starterQuestions);
         }
       })
       .catch(() => {});
@@ -127,8 +134,20 @@ export default function AIChatbot() {
     return "Context: Market Overview";
   }, [pathname, currentSymbol]);
 
-  // Route-aware starter questions
+  // Route-aware starter questions (with Admin custom overrides)
   const starterQuestions = useMemo(() => {
+    if (customQuestionsMap) {
+      if (currentSymbol && customQuestionsMap[currentSymbol] && customQuestionsMap[currentSymbol].length > 0) {
+        return customQuestionsMap[currentSymbol];
+      }
+      if (customQuestionsMap[pathname] && customQuestionsMap[pathname].length > 0) {
+        return customQuestionsMap[pathname];
+      }
+      if (customQuestionsMap["default"] && customQuestionsMap["default"].length > 0) {
+        return customQuestionsMap["default"];
+      }
+    }
+
     if (currentSymbol) {
       return [
         "Why was this model selected?",
@@ -163,7 +182,7 @@ export default function AIChatbot() {
       "Why was this model chosen?",
       "What is the Backtest chart showing?",
     ];
-  }, [pathname, currentSymbol]);
+  }, [pathname, currentSymbol, customQuestionsMap]);
 
   // Scroll to bottom when messages update
   useEffect(() => {

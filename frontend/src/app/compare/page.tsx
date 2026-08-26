@@ -36,6 +36,8 @@ function calculateMedian(values: number[]): number {
   return sorted.length % 2 !== 0 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2;
 }
 
+export const dynamic = "force-dynamic";
+
 export default async function ComparePage() {
   const [metrics, siteConfig] = await Promise.all([
     getMetrics(),

@@ -6,6 +6,8 @@ import { getCompanies, getDashboard, getMetrics } from "@/lib/data";
 import { getSiteConfig } from "@/lib/admin/config";
 import { formatDate, formatDateTimePht, formatNum, formatPeso } from "@/lib/format";
 
+export const dynamic = "force-dynamic";
+
 export default async function HomePage() {
   const [dashboard, allCompanies, metrics, siteConfig] = await Promise.all([
     getDashboard(),

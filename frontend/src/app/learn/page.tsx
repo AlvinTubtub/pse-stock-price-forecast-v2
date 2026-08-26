@@ -1,5 +1,7 @@
 import { getSiteConfig } from "@/lib/admin/config";
 
+export const dynamic = "force-dynamic";
+
 export default async function LearnPage() {
   const siteConfig = await getSiteConfig();
 

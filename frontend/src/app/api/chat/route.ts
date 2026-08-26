@@ -2,9 +2,12 @@ import { NextRequest, NextResponse } from "next/server";
 import { GoogleGenAI } from "@google/genai";
 import { buildContextForRequest } from "@/lib/ai/context";
 import { buildSystemPrompt } from "@/lib/ai/prompt";
+import { getSiteConfig } from "@/lib/admin/config";
 
-const PRIMARY_MODEL = "gemini-3.5-flash-lite";
-const FALLBACK_MODEL = "gemini-3.5-flash";
+export const dynamic = "force-dynamic";
+
+const DEFAULT_PRIMARY_MODEL = "gemini-2.5-flash";
+const DEFAULT_FALLBACK_MODEL = "gemini-2.5-flash-lite";
 const MAX_MESSAGE_LENGTH = 1000;
 const MAX_HISTORY_TURNS = 6;
 
@@ -48,19 +51,24 @@ function isRateLimitError(error: any): boolean {
 async function generateWithResilience(
   ai: GoogleGenAI,
   contents: Array<{ role: "user" | "model"; parts: Array<{ text: string }> }>,
-  systemPrompt: string
+  systemPrompt: string,
+  primaryModel: string,
+  fallbackModel: string
 ): Promise<string> {
   const config = {
     systemInstruction: systemPrompt,
     maxOutputTokens: 1000,
   };
 
+  const primary = primaryModel || DEFAULT_PRIMARY_MODEL;
+  const fallback = fallbackModel || DEFAULT_FALLBACK_MODEL;
+
   let primaryFailed = false;
 
-  // Attempt 1: Primary Model (gemini-3.5-flash-lite)
+  // Attempt 1: Configured Primary Model
   try {
     const response = await ai.models.generateContent({
-      model: PRIMARY_MODEL,
+      model: primary,
       contents,
       config,
     });
@@ -80,18 +88,18 @@ async function generateWithResilience(
 
     if (isNotFound) {
       console.warn(
-        `Gemini primary model (${PRIMARY_MODEL}) not available or deprecated. Immediately switching to fallback: ${FALLBACK_MODEL}`
+        `Gemini primary model (${primary}) not available or deprecated. Switching to fallback: ${fallback}`
       );
     } else {
       console.warn(
-        `Gemini primary model unavailable: ${PRIMARY_MODEL}. Retrying primary model after short delay...`
+        `Gemini primary model (${primary}) transient error. Retrying after delay...`
       );
 
-      // Attempt 2: Retry Primary Model once after short delay (only for transient errors, not 404s)
+      // Attempt 2: Retry Primary Model once after short delay
       await delay(750);
       try {
         const response = await ai.models.generateContent({
-          model: PRIMARY_MODEL,
+          model: primary,
           contents,
           config,
         });
@@ -103,17 +111,17 @@ async function generateWithResilience(
           throw retryError;
         }
         console.warn(
-          `Gemini primary model (${PRIMARY_MODEL}) failed on retry. Attempting fallback model: ${FALLBACK_MODEL}`
+          `Gemini primary model (${primary}) failed on retry. Attempting fallback model: ${fallback}`
         );
       }
     }
   }
 
-  // Attempt 3: Fallback Model (gemini-3.5-flash)
+  // Attempt 3: Configured Fallback Model
   if (primaryFailed) {
     try {
       const response = await ai.models.generateContent({
-        model: FALLBACK_MODEL,
+        model: fallback,
         contents,
         config,
       });
@@ -121,7 +129,7 @@ async function generateWithResilience(
       if (text) return text;
     } catch (error: any) {
       console.error(
-        `Gemini fallback model (${FALLBACK_MODEL}) also failed:`,
+        `Gemini fallback model (${fallback}) failed:`,
         error?.message || "Unknown error"
       );
       throw error;
@@ -133,6 +141,15 @@ async function generateWithResilience(
 
 export async function POST(req: NextRequest) {
   try {
+    // 1. Check AI enabled status from published configuration in Neon
+    const siteConfig = await getSiteConfig(false);
+    if (siteConfig.ai?.enabled === false || siteConfig.features?.aiAssistant === false) {
+      return NextResponse.json(
+        { error: "The AI Assistant is currently disabled by administrators." },
+        { status: 403 }
+      );
+    }
+
     const apiKey = process.env.GEMINI_API_KEY;
     if (!apiKey || apiKey.trim() === "" || apiKey === "your_gemini_api_key_here") {
       return NextResponse.json(
@@ -156,7 +173,7 @@ export async function POST(req: NextRequest) {
 
     const { message, route, symbol, history } = body || {};
 
-    // 1. Validate message
+    // 2. Validate message
     if (!message || typeof message !== "string" || message.trim().length === 0) {
       return NextResponse.json(
         { error: "Please provide a valid question or message." },
@@ -174,11 +191,11 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // 2. Build page-aware context & system prompt
+    // 3. Build page-aware context & system prompt incorporating Admin custom guidelines
     const contextData = await buildContextForRequest({ route, symbol });
-    const systemPrompt = buildSystemPrompt(contextData);
+    const systemPrompt = buildSystemPrompt(contextData, siteConfig.ai?.customGuidelines);
 
-    // 3. Format conversational contents for Gemini API
+    // 4. Format conversational contents for Gemini API
     const contents: Array<{ role: "user" | "model"; parts: Array<{ text: string }> }> = [];
 
     if (Array.isArray(history)) {
@@ -200,9 +217,18 @@ export async function POST(req: NextRequest) {
       parts: [{ text: cleanMessage }],
     });
 
-    // 4. Invoke Gemini API with primary, retry, and fallback resilience
+    // 5. Invoke Gemini API with dynamic model selection and resilience
+    const primaryModel = siteConfig.ai?.primaryModel || DEFAULT_PRIMARY_MODEL;
+    const fallbackModel = siteConfig.ai?.fallbackModel || DEFAULT_FALLBACK_MODEL;
+
     const ai = new GoogleGenAI({ apiKey });
-    const replyText = await generateWithResilience(ai, contents, systemPrompt);
+    const replyText = await generateWithResilience(
+      ai,
+      contents,
+      systemPrompt,
+      primaryModel,
+      fallbackModel
+    );
 
     return NextResponse.json({ reply: replyText });
   } catch (error: any) {

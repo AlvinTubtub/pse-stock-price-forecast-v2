@@ -2,6 +2,8 @@ import { getCompanies, getMetrics } from "@/lib/data";
 import { getSiteConfig } from "@/lib/admin/config";
 import CompareCompaniesClient from "@/components/CompareCompaniesClient";
 
+export const dynamic = "force-dynamic";
+
 export default async function CompareCompaniesPage() {
   const [allCompanies, metrics, siteConfig] = await Promise.all([
     getCompanies(),

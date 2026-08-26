@@ -2,6 +2,8 @@ import CompanyGrid from "@/components/CompanyGrid";
 import { getCompanies } from "@/lib/data";
 import { getSiteConfig } from "@/lib/admin/config";
 
+export const dynamic = "force-dynamic";
+
 export default async function CompaniesPage() {
   const [allCompanies, siteConfig] = await Promise.all([
     getCompanies(),

@@ -2,6 +2,8 @@ import { getCompanies, getDashboard } from "@/lib/data";
 import { getSiteConfig } from "@/lib/admin/config";
 import SectorsClient from "@/components/SectorsClient";
 
+export const dynamic = "force-dynamic";
+
 export default async function SectorsPage() {
   const [allCompanies, dashboard, siteConfig] = await Promise.all([
     getCompanies(),

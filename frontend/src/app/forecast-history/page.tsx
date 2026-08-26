@@ -2,6 +2,8 @@ import { getAllSymbols, getCompanyDetail } from "@/lib/data";
 import { getSiteConfig } from "@/lib/admin/config";
 import ForecastHistoryClient from "@/components/ForecastHistoryClient";
 
+export const dynamic = "force-dynamic";
+
 export default async function ForecastHistoryPage() {
   const [symbols, siteConfig] = await Promise.all([
     getAllSymbols(),
