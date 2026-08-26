@@ -2,11 +2,11 @@
   "symbol": "ICT",
   "name": "Intl. Container Terminal Services",
   "sector": "Services",
-  "previousClose": 949.0,
+  "previousClose": 920.5,
   "predictedClose": 936.85,
-  "pesoChange": -12.15,
-  "pctChange": -1.28,
-  "direction": "bearish",
+  "pesoChange": 16.35,
+  "pctChange": 1.78,
+  "direction": "bullish",
   "model": "ARIMA",
   "confidence": 98.9,
   "metrics": {
@@ -13009,10 +13009,17 @@
       "low": 932.5,
       "close": 949.0,
       "volume": 872810100
+    },
+    {
+      "date": "2026-08-26",
+      "open": 934.0,
+      "high": 941.0,
+      "low": 916.0,
+      "close": 920.5,
+      "volume": 1222651195
     }
   ],
   "backtestDates": [
-    "2026-06-01",
     "2026-06-02",
     "2026-06-03",
     "2026-06-04",
@@ -13071,10 +13078,10 @@
     "2026-08-19",
     "2026-08-20",
     "2026-08-24",
-    "2026-08-25"
+    "2026-08-25",
+    "2026-08-26"
   ],
   "backtestActual": [
-    780.0,
     830.0,
     875.0,
     849.5,
@@ -13133,7 +13140,8 @@
     930.0,
     960.5,
     970.0,
-    949.0
+    949.0,
+    920.5
   ],
   "backtestByModel": {
     "Lag-Informed Regression": [
@@ -13323,7 +13331,6 @@
       956.4571003913879
     ],
     "Naive baseline": [
-      752.5,
       780.0,
       830.0,
       875.0,
@@ -13382,10 +13389,11 @@
       962.5,
       930.0,
       960.5,
-      970.0
+      970.0,
+      949.0
     ]
   },
-  "forecastDate": "2026-08-26",
+  "forecastDate": "2026-08-27",
   "dataAsOf": null,
   "inferenceAt": null
 }
