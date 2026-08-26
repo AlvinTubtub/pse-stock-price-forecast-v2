@@ -368,24 +368,24 @@ export default function HistoryChart({ data }: { data: OhlcvPoint[] }) {
               onMouseUp={chart.handleMouseUp}
               onMouseLeave={chart.handleMouseUp}
             >
-              <CartesianGrid stroke="#334155" strokeDasharray="3 3" vertical={false} />
-              <XAxis dataKey="date" tick={{ fill: "#94a3b8", fontSize: 11 }} minTickGap={35} />
+              <CartesianGrid stroke="var(--chart-grid)" strokeDasharray="3 3" vertical={false} />
+              <XAxis dataKey="date" tick={{ fill: "var(--chart-tick)", fontSize: 11 }} minTickGap={35} />
               <YAxis
                 yAxisId="price"
-                tick={{ fill: "#94a3b8", fontSize: 11 }}
+                tick={{ fill: "var(--chart-tick)", fontSize: 11 }}
                 domain={["auto", "auto"]}
                 tickFormatter={(val) => `₱${val}`}
               />
-              <YAxis yAxisId="volume" orientation="right" tick={{ fill: "#94a3b8", fontSize: 11 }} hide />
+              <YAxis yAxisId="volume" orientation="right" tick={{ fill: "var(--chart-tick)", fontSize: 11 }} hide />
               <Tooltip
                 contentStyle={{
-                  background: "#1e293b",
-                  border: "1px solid #334155",
+                  background: "var(--chart-tooltip-bg)",
+                  border: "1px solid var(--chart-tooltip-border)",
                   borderRadius: 8,
                   fontSize: 12,
-                  boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.5)",
+                  boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.2)",
                 }}
-                labelStyle={{ color: "#f8fafc", fontWeight: 600, marginBottom: 4 }}
+                labelStyle={{ color: "var(--chart-tooltip-text)", fontWeight: 600, marginBottom: 4 }}
                 formatter={(value: any, name: any) => {
                   const num = Number(value);
                   if (isNaN(num)) return [value, name];

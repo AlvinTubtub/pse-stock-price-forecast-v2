@@ -3,39 +3,12 @@ import { cookies } from "next/headers";
 import { SESSION_COOKIE_NAME, verifySessionToken } from "@/lib/admin/auth";
 import { recordAudit } from "@/lib/admin/audit";
 import { getLatest, getDashboard, getCompanies } from "@/lib/data";
-
-interface PipelineRun {
-  id: string;
-  action: string;
-  status: "queued" | "running" | "success" | "failed";
-  triggeredBy: string;
-  startedAt: string;
-  completedAt?: string;
-  message?: string;
-  url?: string;
-}
-
-// In-memory cache for recent dispatches and local fallback
-let inMemoryPipelineRuns: PipelineRun[] = [
-  {
-    id: "run-init-1",
-    action: "Fast Pipeline (data_update)",
-    status: "success",
-    triggeredBy: "cron-job.org",
-    startedAt: "2026-08-19T08:00:00.000Z",
-    completedAt: "2026-08-19T08:04:12.000Z",
-    message: "15 PSE equities updated with zero errors.",
-  },
-  {
-    id: "run-init-2",
-    action: "Weekly Model Retraining",
-    status: "success",
-    triggeredBy: "github-actions[bot]",
-    startedAt: "2026-08-17T00:00:00.000Z",
-    completedAt: "2026-08-17T00:48:30.000Z",
-    message: "Retrained ARIMA, Lag-Reg, and LSTM models across 15 tickers.",
-  },
-];
+import {
+  recordPipelineRun,
+  updatePipelineRunStatus,
+  getPipelineRuns,
+  PipelineRun,
+} from "@/lib/admin/pipeline";
 
 const ACTION_LABELS: Record<string, string> = {
   data_update: "Run Data Update",
@@ -45,18 +18,27 @@ const ACTION_LABELS: Record<string, string> = {
   validate: "Validate Export Artifacts",
 };
 
+const ACTION_AUDIT_KEYS: Record<string, string> = {
+  data_update: "PIPELINE_DATA_UPDATE_TRIGGERED",
+  inference: "PIPELINE_INFERENCE_TRIGGERED",
+  training: "PIPELINE_TRAINING_TRIGGERED",
+  export: "PIPELINE_EXPORT_TRIGGERED",
+  validate: "PIPELINE_VALIDATION_TRIGGERED",
+};
+
 export async function GET() {
-  const [latest, dashboard, companies] = await Promise.all([
+  const [latest, dashboard, companies, persistedRuns] = await Promise.all([
     getLatest(),
     getDashboard(),
     getCompanies(),
+    getPipelineRuns(30),
   ]);
 
   const repoOwner = process.env.GITHUB_REPOSITORY_OWNER || "AlvinTubtub";
   const repoName = process.env.GITHUB_REPOSITORY_NAME || "pse-stock-price-forecast-v2";
   const githubToken = process.env.GITHUB_ACTION_TOKEN || process.env.GITHUB_TOKEN;
 
-  let liveRuns: PipelineRun[] = [];
+  let finalRuns: PipelineRun[] = persistedRuns;
 
   if (githubToken) {
     try {
@@ -84,45 +66,58 @@ export async function GET() {
             status = r.conclusion === "success" ? "success" : "failed";
           }
 
+          let workflowType = "data_update";
           let actionName = r.name || "Pipeline Execution";
           if (r.path?.includes("train_models.yml") || r.name?.toLowerCase().includes("training")) {
+            workflowType = "training";
             actionName = "Weekly Model Retraining";
           } else if (r.path?.includes("update_pipeline.yml") || r.name?.toLowerCase().includes("fast pipeline")) {
+            workflowType = "data_update";
             actionName = "Fast Pipeline";
+          }
+
+          // Sync completion status back to database if matching run exists
+          const matchingDbRun = persistedRuns.find(
+            (p) => p.githubRunId === r.id || (p.status === "running" && Math.abs(new Date(p.startedAt).getTime() - new Date(r.created_at).getTime()) < 120000)
+          );
+
+          if (matchingDbRun && matchingDbRun.status !== status) {
+            updatePipelineRunStatus(matchingDbRun.id, status, {
+              completedAt: r.status === "completed" ? r.updated_at : undefined,
+              githubRunId: r.id,
+              errorMessage: status === "failed" ? `GitHub run #${r.run_number} failed with conclusion: ${r.conclusion}` : undefined,
+            }).catch(() => {});
           }
 
           return {
             id: String(r.id),
-            action: actionName,
+            workflowType,
+            githubRunId: r.id,
             status,
             triggeredBy: r.triggering_actor?.login || r.actor?.login || "github-actions",
+            triggerType: r.event === "schedule" ? "cron" : r.event === "workflow_dispatch" ? "admin_manual" : r.event,
             startedAt: r.run_started_at || r.created_at,
             completedAt: r.status === "completed" ? r.updated_at : undefined,
-            message: r.display_title || r.name,
+            errorMessage: status === "failed" ? `Workflow run failed (${r.conclusion})` : undefined,
+            metadata: { title: r.display_title || r.name, workflow: r.path },
             url: r.html_url,
           };
         });
 
-        // Merge any very recent in-memory optimistic dispatches that haven't appeared in GH yet (< 30s old)
-        const recentOptimistic = inMemoryPipelineRuns.filter((m) => {
-          const ageMs = Date.now() - new Date(m.startedAt).getTime();
-          return ageMs < 30000 && !runsFromGh.some((gh: PipelineRun) => gh.startedAt === m.startedAt);
-        });
+        // Merge optimistic/queued DB runs that haven't appeared on GitHub yet
+        const recentDbRuns = persistedRuns.filter(
+          (dbRun) => !runsFromGh.some((ghRun: PipelineRun) => ghRun.githubRunId === dbRun.githubRunId || ghRun.id === dbRun.id)
+        );
 
-        liveRuns = [...recentOptimistic, ...runsFromGh];
-      } else {
-        liveRuns = inMemoryPipelineRuns;
+        finalRuns = [...recentDbRuns, ...runsFromGh];
       }
     } catch (err) {
-      console.warn("[api/admin/pipeline] Failed to fetch GitHub Actions runs:", err);
-      liveRuns = inMemoryPipelineRuns;
+      console.warn("[api/admin/pipeline] Failed to synchronize live GitHub runs:", err);
     }
-  } else {
-    liveRuns = inMemoryPipelineRuns;
   }
 
   return NextResponse.json({
-    runs: liveRuns,
+    runs: finalRuns.slice(0, 30),
     latestPipelineInfo: {
       dataAsOf: "2026-08-19",
       forecastDate: latest?.forecastDate || "2026-08-20",
@@ -154,12 +149,24 @@ export async function POST(request: Request) {
     }
 
     const actionName = ACTION_LABELS[action] || action;
-    const runId = `dispatch-${Date.now()}`;
+    const auditEvent = ACTION_AUDIT_KEYS[action] || `PIPELINE_${action.toUpperCase()}_TRIGGERED`;
+    const runId = `run-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`;
     const startedAt = new Date().toISOString();
 
     const repoOwner = process.env.GITHUB_REPOSITORY_OWNER || "AlvinTubtub";
     const repoName = process.env.GITHUB_REPOSITORY_NAME || "pse-stock-price-forecast-v2";
     const githubToken = process.env.GITHUB_ACTION_TOKEN || process.env.GITHUB_TOKEN;
+
+    // 1. Create initial pipeline_runs record in PostgreSQL
+    const initialRun = await recordPipelineRun({
+      id: runId,
+      workflowType: action,
+      status: "queued",
+      triggeredBy: username,
+      triggerType: "admin_manual",
+      startedAt,
+      metadata: { actionLabel: actionName, repo: `${repoOwner}/${repoName}` },
+    });
 
     let dispatchSuccess = false;
     let dispatchMessage = "";
@@ -168,14 +175,11 @@ export async function POST(request: Request) {
       const isTraining = action === "training";
       const workflowFile = isTraining ? "train_models.yml" : "update_pipeline.yml";
 
-      // Training has no action input; all other actions pass inputs.action
       const dispatchPayload = isTraining
         ? { ref: "main" }
         : {
             ref: "main",
-            inputs: {
-              action: action, // "data_update" | "inference" | "export" | "validate"
-            },
+            inputs: { action },
           };
 
       try {
@@ -196,8 +200,13 @@ export async function POST(request: Request) {
         if (ghRes.ok || ghRes.status === 204) {
           dispatchSuccess = true;
           dispatchMessage = `Triggered '${workflowFile}' for action '${action}' in ${repoOwner}/${repoName}.`;
+
+          // Update status to running
+          await updatePipelineRunStatus(runId, "running", {
+            metadata: { workflowFile, message: dispatchMessage },
+          });
         } else {
-          // Administrator-safe error mapping without leaking secrets or tokens
+          // Administrator-safe error mapping without leaking secrets
           switch (ghRes.status) {
             case 401:
               dispatchMessage = "GitHub authentication failed: GITHUB_ACTION_TOKEN is invalid or expired.";
@@ -214,30 +223,31 @@ export async function POST(request: Request) {
             default:
               dispatchMessage = `GitHub Actions API returned error status ${ghRes.status}.`;
           }
+
+          // Update status to failed
+          await updatePipelineRunStatus(runId, "failed", {
+            errorMessage: dispatchMessage,
+          });
         }
       } catch (err: any) {
         dispatchMessage = "Network error communicating with GitHub Actions API.";
+        await updatePipelineRunStatus(runId, "failed", {
+          errorMessage: dispatchMessage,
+        });
       }
     } else {
       // Local development simulation fallback
       dispatchSuccess = true;
       dispatchMessage = `Simulated ${actionName} dispatch (GITHUB_ACTION_TOKEN not configured in local environment). Target: ${repoOwner}/${repoName}`;
+      await updatePipelineRunStatus(runId, "running", {
+        metadata: { simulated: true, note: dispatchMessage },
+      });
     }
 
-    const newRun: PipelineRun = {
-      id: runId,
-      action: actionName,
-      status: dispatchSuccess ? "queued" : "failed",
-      triggeredBy: username,
-      startedAt,
-      message: dispatchMessage,
-    };
-
-    inMemoryPipelineRuns = [newRun, ...inMemoryPipelineRuns].slice(0, 50);
-
+    // 2. Record persistent audit log
     await recordAudit(
       username,
-      `Triggered ${actionName} (${action})`,
+      auditEvent,
       "Data Pipeline",
       dispatchSuccess ? "success" : "failed",
       dispatchMessage
@@ -248,7 +258,7 @@ export async function POST(request: Request) {
         {
           success: false,
           error: dispatchMessage,
-          run: newRun,
+          run: { ...initialRun, status: "failed", errorMessage: dispatchMessage },
         },
         { status: 502 }
       );
@@ -256,7 +266,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({
       success: true,
-      run: newRun,
+      run: { ...initialRun, status: "running" },
       message: dispatchMessage,
     });
   } catch (err: any) {

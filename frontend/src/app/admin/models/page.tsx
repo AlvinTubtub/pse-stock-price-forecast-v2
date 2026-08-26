@@ -4,16 +4,27 @@ import React, { useState, useEffect } from "react";
 import ConfirmationModal from "@/components/admin/ConfirmationModal";
 import type { SiteConfig } from "@/lib/admin/types";
 import type { MetricsData } from "@/lib/types";
-import { formatNum } from "@/lib/format";
+import { formatNum, formatDate } from "@/lib/format";
+
+interface ModelTrainingMetadata {
+  id: string;
+  modelKey: string;
+  status: "queued" | "running" | "success" | "failed";
+  startedAt: string;
+  completedAt?: string;
+  artifactVersion?: string;
+  metrics?: Record<string, any>;
+}
 
 export default function ModelsAdminPage() {
   const [config, setConfig] = useState<SiteConfig | null>(null);
   const [metrics, setMetrics] = useState<MetricsData | null>(null);
+  const [latestRuns, setLatestRuns] = useState<Record<string, ModelTrainingMetadata | null>>({});
   const [isSaving, setIsSaving] = useState(false);
   const [feedback, setFeedback] = useState<{ type: "success" | "error"; text: string } | null>(null);
   const [confirmTraining, setConfirmTraining] = useState(false);
 
-  useEffect(() => {
+  const fetchModelData = () => {
     fetch("/forecasts/metrics.json")
       .then((r) => r.json())
       .then((data) => setMetrics(data))
@@ -27,6 +38,19 @@ export default function ModelsAdminPage() {
         }
       })
       .catch(() => {});
+
+    fetch("/api/admin/models")
+      .then((r) => r.json())
+      .then((data) => {
+        if (data?.latestRuns) {
+          setLatestRuns(data.latestRuns);
+        }
+      })
+      .catch(() => {});
+  };
+
+  useEffect(() => {
+    fetchModelData();
   }, []);
 
   const handleToggleModel = async (modelId: "arima" | "lag_reg" | "lstm") => {
@@ -85,6 +109,7 @@ export default function ModelsAdminPage() {
         type: "success",
         text: "Weekly model training workflow dispatched to GitHub Actions successfully.",
       });
+      fetchModelData();
     } catch (err: any) {
       setFeedback({ type: "error", text: err.message || "Training dispatch failed." });
     } finally {
@@ -167,7 +192,10 @@ export default function ModelsAdminPage() {
       <div className="space-y-5">
         {modelDefinitions.map((model) => {
           const isEnabled = config?.models[model.id]?.enabled !== false;
-          const lastTrained = config?.models[model.id]?.lastTrained || "2026-08-19";
+          const trainingMeta = latestRuns[model.id];
+          const lastTrained = trainingMeta?.completedAt
+            ? formatDate(trainingMeta.completedAt)
+            : config?.models[model.id]?.lastTrained || "2026-08-19";
 
           return (
             <div
@@ -183,6 +211,11 @@ export default function ModelsAdminPage() {
                     <span className="text-xs px-2.5 py-0.5 rounded bg-dark-bg border border-dark-border text-slate-300">
                       {model.type}
                     </span>
+                    {trainingMeta?.artifactVersion && (
+                      <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-brand-500/10 text-brand-300 border border-brand-500/20">
+                        {trainingMeta.artifactVersion}
+                      </span>
+                    )}
                   </div>
                   <p className="text-xs text-slate-400 max-w-2xl">{model.desc}</p>
                 </div>

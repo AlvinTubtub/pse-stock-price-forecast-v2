@@ -286,10 +286,10 @@ export default function NextDayPredictionChart({
             data={chartData}
             margin={{ top: 15, right: 30, left: 10, bottom: 15 }}
           >
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" vertical={false} />
+            <CartesianGrid stroke="var(--chart-grid)" strokeDasharray="3 3" vertical={false} />
             <XAxis
               dataKey="dateKey"
-              tick={{ fill: "#94a3b8", fontSize: 11 }}
+              tick={{ fill: "var(--chart-tick)", fontSize: 11 }}
               tickFormatter={(val) => {
                 const item = chartData.find((d) => d.dateKey === val);
                 return item ? item.displayDate : val;
@@ -298,14 +298,14 @@ export default function NextDayPredictionChart({
               interval="preserveStartEnd"
             />
             <YAxis
-              tick={{ fill: "#94a3b8", fontSize: 11 }}
+              tick={{ fill: "var(--chart-tick)", fontSize: 11 }}
               domain={yDomain}
               tickFormatter={(val) => `₱${Number(val).toLocaleString()}`}
               label={{
                 value: "Price (₱)",
                 angle: -90,
                 position: "insideLeft",
-                fill: "#64748b",
+                fill: "var(--chart-label)",
                 fontSize: 11,
               }}
             />

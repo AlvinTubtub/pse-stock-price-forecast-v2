@@ -201,10 +201,10 @@ export default function ErrorChart({ dates, actual, byModel, selectedModel }: Er
             onMouseUp={chart.handleMouseUp}
             onMouseLeave={chart.handleMouseUp}
           >
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" vertical={false} />
+            <CartesianGrid stroke="var(--chart-grid)" strokeDasharray="3 3" vertical={false} />
             <XAxis
               dataKey="step"
-              tick={{ fill: "#94a3b8", fontSize: 11 }}
+              tick={{ fill: "var(--chart-tick)", fontSize: 11 }}
               tickFormatter={(val) => {
                 const item = data.find((d) => d.step === val);
                 return item ? item.displayDate : val;
@@ -213,14 +213,14 @@ export default function ErrorChart({ dates, actual, byModel, selectedModel }: Er
               interval="preserveStartEnd"
             />
             <YAxis
-              tick={{ fill: "#94a3b8", fontSize: 11 }}
+              tick={{ fill: "var(--chart-tick)", fontSize: 11 }}
               domain={[-yLimit, yLimit]}
               tickFormatter={(val) => `${val > 0 ? "+" : ""}₱${Number(val).toFixed(2)}`}
               label={{
                 value: "Forecast Error (₱)",
                 angle: -90,
                 position: "insideLeft",
-                fill: "#64748b",
+                fill: "var(--chart-label)",
                 fontSize: 11,
               }}
             />
@@ -228,13 +228,13 @@ export default function ErrorChart({ dates, actual, byModel, selectedModel }: Er
             {/* Zero Reference Line (0 = Perfect Prediction) */}
             <ReferenceLine
               y={0}
-              stroke="#94a3b8"
+              stroke="var(--chart-tick)"
               strokeDasharray="3 3"
               strokeWidth={1.5}
               label={{
                 value: "0 (Exact)",
                 position: "right",
-                fill: "#94a3b8",
+                fill: "var(--chart-tick)",
                 fontSize: 10,
               }}
             />

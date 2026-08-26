@@ -27,11 +27,11 @@ export default function MetricExplanationCard({
           <h3 className="text-base font-bold text-white tracking-tight">
             Evaluation Metrics: {modelName}
           </h3>
-          <p className="text-xs text-slate-400 mt-0.5">
+          <p className="text-xs font-medium text-slate-600 dark:text-slate-300 mt-0.5">
             Calculated on the chronological 15% held-out test split for {symbol}.
           </p>
         </div>
-        <span className="text-[11px] text-slate-400 font-mono bg-dark-bg px-2.5 py-1 rounded-md border border-dark-border self-start sm:self-auto">
+        <span className="text-[11px] font-semibold text-slate-600 dark:text-slate-300 font-mono bg-dark-bg px-2.5 py-1 rounded-md border border-dark-border self-start sm:self-auto">
           Out-of-Sample Test
         </span>
       </div>
@@ -41,14 +41,14 @@ export default function MetricExplanationCard({
         <div className="bg-dark-bg/80 border border-dark-border rounded-xl p-4 flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between mb-1">
-              <span className="text-xs font-semibold text-brand-400 uppercase tracking-wide">
+              <span className="text-xs font-bold text-brand-600 dark:text-brand-400 uppercase tracking-wide">
                 RMSE
               </span>
-              <span className="text-[10px] text-slate-400 uppercase font-mono">Lower is better</span>
+              <span className="text-[10px] font-medium text-slate-500 dark:text-slate-400 uppercase font-mono">Lower is better</span>
             </div>
             <p className="text-2xl font-bold text-white font-mono my-1">₱{rmse}</p>
           </div>
-          <p className="text-xs text-slate-400 mt-2 leading-relaxed">
+          <p className="text-xs font-medium text-slate-600 dark:text-slate-300 mt-2 leading-relaxed">
             Measures the typical magnitude of prediction errors, heavily penalizing large outliers.
           </p>
         </div>
@@ -57,14 +57,14 @@ export default function MetricExplanationCard({
         <div className="bg-dark-bg/80 border border-dark-border rounded-xl p-4 flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between mb-1">
-              <span className="text-xs font-semibold text-emerald-400 uppercase tracking-wide">
+              <span className="text-xs font-bold text-emerald-400 uppercase tracking-wide">
                 MAE
               </span>
-              <span className="text-[10px] text-slate-400 uppercase font-mono">Lower is better</span>
+              <span className="text-[10px] font-medium text-slate-500 dark:text-slate-400 uppercase font-mono">Lower is better</span>
             </div>
             <p className="text-2xl font-bold text-white font-mono my-1">₱{mae}</p>
           </div>
-          <p className="text-xs text-slate-400 mt-2 leading-relaxed">
+          <p className="text-xs font-medium text-slate-600 dark:text-slate-300 mt-2 leading-relaxed">
             Average absolute difference between the predicted and actual stock closing price.
           </p>
         </div>
@@ -73,11 +73,11 @@ export default function MetricExplanationCard({
         <div className="bg-dark-bg/80 border border-dark-border rounded-xl p-4 flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between mb-1">
-              <span className="text-xs font-semibold text-amber-400 uppercase tracking-wide">
+              <span className="text-xs font-bold text-amber-400 uppercase tracking-wide">
                 MASE
               </span>
               <span
-                className={`text-[10px] uppercase font-mono px-1.5 py-0.5 rounded ${
+                className={`text-[10px] uppercase font-mono font-bold px-1.5 py-0.5 rounded ${
                   beatsNaive
                     ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
                     : "bg-amber-500/10 text-amber-400 border border-amber-500/20"
@@ -94,7 +94,7 @@ export default function MetricExplanationCard({
               {mase}
             </p>
           </div>
-          <p className="text-xs text-slate-400 mt-2 leading-relaxed">
+          <p className="text-xs font-medium text-slate-600 dark:text-slate-300 mt-2 leading-relaxed">
             Compares model accuracy to the naive persistence baseline. A value below 1.0 indicates superior forecasting.
           </p>
         </div>
@@ -103,14 +103,14 @@ export default function MetricExplanationCard({
         <div className="bg-dark-bg/80 border border-dark-border rounded-xl p-4 flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between mb-1">
-              <span className="text-xs font-semibold text-cyan-400 uppercase tracking-wide">
+              <span className="text-xs font-bold text-cyan-400 uppercase tracking-wide">
                 R² (Variance)
               </span>
-              <span className="text-[10px] text-slate-400 uppercase font-mono">Goodness of fit</span>
+              <span className="text-[10px] font-medium text-slate-500 dark:text-slate-400 uppercase font-mono">Goodness of fit</span>
             </div>
             <p className="text-2xl font-bold text-white font-mono my-1">{r2}</p>
           </div>
-          <p className="text-xs text-slate-400 mt-2 leading-relaxed">
+          <p className="text-xs font-medium text-slate-600 dark:text-slate-300 mt-2 leading-relaxed">
             Proportion of price variance explained in the test split. (Not a forecast probability or confidence).
           </p>
         </div>

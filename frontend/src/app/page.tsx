@@ -98,26 +98,26 @@ export default async function HomePage() {
 
         {/* Timestamp metadata */}
         {(dashboard?.forecastDate || dashboard?.lastRunAt) && (
-          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 mt-6 pt-4 border-t border-dark-border/60 text-xs text-slate-400">
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 mt-6 pt-4 border-t border-dark-border/60 text-xs">
             {dashboard?.forecastDate && (
               <div className="flex items-center gap-1.5">
-                <span className="text-slate-500">Forecast Horizon:</span>
-                <strong className="text-brand-300 font-medium font-mono">
+                <span className="text-slate-600 dark:text-slate-300 font-medium">Forecast Horizon:</span>
+                <strong className="text-brand-600 dark:text-brand-300 font-bold font-mono">
                   {formatDate(dashboard.forecastDate)} (1 Trading Day)
                 </strong>
               </div>
             )}
-            {dashboard?.forecastDate && dashboard?.lastRunAt && <span>&middot;</span>}
+            {dashboard?.forecastDate && dashboard?.lastRunAt && <span className="text-slate-400 dark:text-slate-500">&middot;</span>}
             {dashboard?.lastRunAt && (
               <div className="flex items-center gap-1.5">
-                <span className="text-slate-500">Pipeline Execution:</span>
-                <span className="text-slate-300">{formatDateTimePht(dashboard.lastRunAt)}</span>
+                <span className="text-slate-600 dark:text-slate-300 font-medium">Pipeline Execution:</span>
+                <span className="text-slate-800 dark:text-slate-100 font-semibold">{formatDateTimePht(dashboard.lastRunAt)}</span>
               </div>
             )}
-            <span>&middot;</span>
+            <span className="text-slate-400 dark:text-slate-500">&middot;</span>
             <div className="flex items-center gap-1.5">
-              <span className="text-slate-500">Data Source:</span>
-              <span className="text-slate-300">{content.dataSourceText}</span>
+              <span className="text-slate-600 dark:text-slate-300 font-medium">Data Source:</span>
+              <span className="text-slate-800 dark:text-slate-100 font-semibold">{content.dataSourceText}</span>
             </div>
           </div>
         )}
@@ -126,36 +126,36 @@ export default async function HomePage() {
       {/* 2. Market Snapshot */}
       <section className="space-y-3">
         <div className="flex items-center justify-between">
-          <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-400">
+          <h2 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-slate-700 dark:text-slate-200">
             Market Snapshot
           </h2>
-          <span className="text-xs text-slate-500 font-mono">PSE Historical Pipeline</span>
+          <span className="text-xs font-semibold text-slate-600 dark:text-slate-300 font-mono">PSE Historical Pipeline</span>
         </div>
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3.5">
           <div className="bg-dark-card border border-dark-border rounded-xl p-4 shadow-sm">
-            <p className="text-[11px] uppercase tracking-wide text-slate-400 mb-1">Pipeline Status</p>
+            <p className="text-[11px] uppercase tracking-wider font-semibold text-slate-600 dark:text-slate-300 mb-1">Pipeline Status</p>
             <div className="flex items-center gap-2">
               <span className="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
-              <span className="text-lg font-bold text-white uppercase font-mono">
+              <span className="text-lg font-extrabold text-white uppercase font-mono">
                 {dashboard?.status ?? "Operational"}
               </span>
             </div>
-            <p className="text-[11px] text-slate-500 mt-1">Automated Daily Inference</p>
+            <p className="text-xs font-medium text-slate-600 dark:text-slate-300 mt-1">Automated Daily Inference</p>
           </div>
 
           <div className="bg-dark-card border border-dark-border rounded-xl p-4 shadow-sm">
-            <p className="text-[11px] uppercase tracking-wide text-slate-400 mb-1">Companies Tracked</p>
-            <p className="text-2xl font-bold text-white font-mono">
+            <p className="text-[11px] uppercase tracking-wider font-semibold text-slate-600 dark:text-slate-300 mb-1">Companies Tracked</p>
+            <p className="text-2xl font-extrabold text-white font-mono">
               {companies.length}
             </p>
-            <p className="text-[11px] text-slate-500 mt-1">
+            <p className="text-xs font-medium text-slate-600 dark:text-slate-300 mt-1">
               Active Published Equities
             </p>
           </div>
 
           <div className="bg-dark-card border border-dark-border rounded-xl p-4 shadow-sm">
-            <p className="text-[11px] uppercase tracking-wide text-slate-400 mb-1">Forecast Direction</p>
+            <p className="text-[11px] uppercase tracking-wider font-semibold text-slate-600 dark:text-slate-300 mb-1">Forecast Direction</p>
             <div className="flex items-baseline gap-2 font-mono">
               <span className="text-xl font-bold text-emerald-400">
                 {dashboard?.marketSummary.gainers ?? 0} ↑
@@ -163,17 +163,17 @@ export default async function HomePage() {
               <span className="text-xl font-bold text-rose-400">
                 {dashboard?.marketSummary.losers ?? 0} ↓
               </span>
-              <span className="text-xs text-slate-400">
+              <span className="text-xs font-semibold text-slate-600 dark:text-slate-300">
                 ({dashboard?.marketSummary.unchanged ?? 0} = )
               </span>
             </div>
-            <p className="text-[11px] text-slate-500 mt-1">Next-Session Bias</p>
+            <p className="text-xs font-medium text-slate-600 dark:text-slate-300 mt-1">Next-Session Bias</p>
           </div>
 
           <div className="bg-dark-card border border-dark-border rounded-xl p-4 shadow-sm">
-            <p className="text-[11px] uppercase tracking-wide text-slate-400 mb-1">Forecast Horizon</p>
-            <p className="text-xl font-bold text-white">1 Trading Day</p>
-            <p className="text-[11px] text-brand-400 mt-1">Next Closing Session</p>
+            <p className="text-[11px] uppercase tracking-wider font-semibold text-slate-600 dark:text-slate-300 mb-1">Forecast Horizon</p>
+            <p className="text-xl font-extrabold text-white">1 Trading Day</p>
+            <p className="text-xs font-semibold text-brand-600 dark:text-brand-300 mt-1">Next Closing Session</p>
           </div>
         </div>
       </section>
@@ -185,11 +185,11 @@ export default async function HomePage() {
             <h2 className="text-lg font-bold text-white tracking-tight">
               Today&apos;s Forecast Highlights
             </h2>
-            <p className="text-xs text-slate-400 mt-0.5">
+            <p className="text-xs font-medium text-slate-600 dark:text-slate-300 mt-0.5">
               Sample of model-selected closing price estimates for upcoming trading sessions.
             </p>
           </div>
-          <a href="/companies" className="text-xs text-brand-400 hover:text-brand-300 font-medium hidden sm:inline">
+          <a href="/companies" className="text-xs font-semibold text-brand-600 dark:text-brand-400 hover:underline hidden sm:inline">
             View All {companies.length} Companies →
           </a>
         </div>

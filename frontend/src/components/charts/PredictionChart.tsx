@@ -183,10 +183,10 @@ export default function PredictionChart({
             onMouseUp={chart.handleMouseUp}
             onMouseLeave={chart.handleMouseUp}
           >
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" vertical={false} />
+            <CartesianGrid stroke="var(--chart-grid)" strokeDasharray="3 3" vertical={false} />
             <XAxis
               dataKey="step"
-              tick={{ fill: "#94a3b8", fontSize: 11 }}
+              tick={{ fill: "var(--chart-tick)", fontSize: 11 }}
               tickFormatter={(val) => {
                 const item = data.find((d) => d.step === val);
                 return item ? item.displayDate : val;
@@ -195,14 +195,14 @@ export default function PredictionChart({
               interval="preserveStartEnd"
             />
             <YAxis
-              tick={{ fill: "#94a3b8", fontSize: 11 }}
+              tick={{ fill: "var(--chart-tick)", fontSize: 11 }}
               domain={["auto", "auto"]}
               tickFormatter={(val) => `₱${Number(val).toLocaleString()}`}
               label={{
                 value: "Price (₱)",
                 angle: -90,
                 position: "insideLeft",
-                fill: "#64748b",
+                fill: "var(--chart-label)",
                 fontSize: 11,
               }}
             />

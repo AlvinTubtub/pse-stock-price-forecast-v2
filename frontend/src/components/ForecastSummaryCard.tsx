@@ -75,52 +75,52 @@ export default function ForecastSummaryCard({
       {/* 4 Stat Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 py-1">
         <div className="bg-dark-bg/80 border border-dark-border/80 rounded-xl p-4">
-          <p className="text-xs text-slate-400 mb-1">Previous Close</p>
+          <p className="text-xs font-semibold text-slate-600 dark:text-slate-300 mb-1">Previous Close</p>
           <p className="text-xl font-bold text-white font-mono">{formatPeso(previousClose)}</p>
           {dataAsOf && (
-            <p className="text-[11px] text-slate-500 mt-1">Settled on {formatDate(dataAsOf)}</p>
+            <p className="text-[11px] font-medium text-slate-500 dark:text-slate-300 mt-1">Settled on {formatDate(dataAsOf)}</p>
           )}
         </div>
 
         <div className="bg-dark-bg/80 border border-brand-500/30 rounded-xl p-4 ring-1 ring-brand-500/20">
-          <p className="text-xs text-brand-300 font-medium mb-1">Forecasted Close</p>
+          <p className="text-xs text-brand-600 dark:text-brand-300 font-semibold mb-1">Forecasted Close</p>
           <p className="text-2xl font-bold text-white font-mono">{formatPeso(predictedClose)}</p>
           {forecastDate && (
-            <p className="text-[11px] text-brand-400 mt-1">Target: {formatDate(forecastDate)}</p>
+            <p className="text-[11px] font-semibold text-brand-600 dark:text-brand-300 mt-1">Target: {formatDate(forecastDate)}</p>
           )}
         </div>
 
         <div className="bg-dark-bg/80 border border-dark-border/80 rounded-xl p-4">
-          <p className="text-xs text-slate-400 mb-1">Expected Change</p>
+          <p className="text-xs font-semibold text-slate-600 dark:text-slate-300 mb-1">Expected Change</p>
           <div className="flex items-baseline gap-2">
             <span className={`text-xl font-bold font-mono ${isPositive ? "text-emerald-400" : isNegative ? "text-rose-400" : "text-slate-300"}`}>
               {pesoChange > 0 ? "+" : ""}{formatPeso(pesoChange)}
             </span>
-            <span className={`text-xs font-semibold ${isPositive ? "text-emerald-400" : isNegative ? "text-rose-400" : "text-slate-400"}`}>
+            <span className={`text-xs font-bold ${isPositive ? "text-emerald-400" : isNegative ? "text-rose-400" : "text-slate-400"}`}>
               ({formatPct(pctChange)})
             </span>
           </div>
-          <p className="text-[11px] text-slate-500 mt-1">Relative Price Shift</p>
+          <p className="text-[11px] font-medium text-slate-500 dark:text-slate-300 mt-1">Relative Price Shift</p>
         </div>
 
         <div className="bg-dark-bg/80 border border-dark-border/80 rounded-xl p-4">
-          <p className="text-xs text-slate-400 mb-1">Selected Model</p>
+          <p className="text-xs font-semibold text-slate-600 dark:text-slate-300 mb-1">Selected Model</p>
           <p className="text-base font-bold text-white truncate" title={model}>
             {model}
           </p>
-          <p className="text-[11px] text-brand-400 mt-1">Lowest out-of-sample RMSE</p>
+          <p className="text-[11px] font-semibold text-brand-600 dark:text-brand-300 mt-1">Lowest out-of-sample RMSE</p>
         </div>
       </div>
 
       {/* Brief Summary Text */}
-      <div className="pt-3 text-xs text-slate-300 leading-relaxed bg-brand-500/5 rounded-xl p-4 border border-brand-500/15">
+      <div className="pt-3 text-xs text-slate-700 dark:text-slate-200 leading-relaxed bg-brand-500/5 rounded-xl p-4 border border-brand-500/15">
         <p>
-          <strong className="text-white font-medium">Educational Estimate: </strong>
+          <strong className="text-slate-900 dark:text-white font-bold">Educational Estimate: </strong>
           The selected model ({model}) estimates that the next trading session&apos;s closing price may be{" "}
           {isPositive ? "higher than" : isNegative ? "lower than" : "approximately equal to"}{" "}
           the previous close ({formatPeso(previousClose)} → {formatPeso(predictedClose)}).
         </p>
-        <p className="text-slate-400 mt-1.5 text-[11px]">
+        <p className="text-slate-500 dark:text-slate-300 mt-1.5 text-[11px] font-medium">
           Forecasts are statistical models for academic decision-support and do not constitute financial advice, buy/sell signals, or guaranteed outcomes.
         </p>
       </div>

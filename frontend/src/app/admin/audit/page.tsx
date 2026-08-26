@@ -4,11 +4,18 @@ import React, { useState, useEffect, useMemo } from "react";
 import type { AuditLogEntry } from "@/lib/admin/types";
 import { formatDate } from "@/lib/format";
 
+interface IntegrityResult {
+  valid: boolean;
+  totalRecords: number;
+  message: string;
+}
+
 export default function AuditAdminPage() {
   const [logs, setLogs] = useState<AuditLogEntry[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedUser, setSelectedUser] = useState("all");
   const [isLoading, setIsLoading] = useState(true);
+  const [integrity, setIntegrity] = useState<IntegrityResult | null>(null);
 
   const fetchLogs = () => {
     setIsLoading(true);
@@ -21,6 +28,11 @@ export default function AuditAdminPage() {
       })
       .catch(() => {})
       .finally(() => setIsLoading(false));
+
+    fetch("/api/admin/audit/verify")
+      .then((r) => r.json())
+      .then((data) => setIntegrity(data))
+      .catch(() => {});
   };
 
   useEffect(() => {
@@ -63,14 +75,30 @@ export default function AuditAdminPage() {
           </p>
         </div>
 
-        <button
-          type="button"
-          onClick={fetchLogs}
-          disabled={isLoading}
-          className="px-3.5 py-1.5 rounded-xl bg-dark-bg hover:bg-dark-bg/80 border border-dark-border text-slate-300 hover:text-white text-xs font-semibold transition-colors cursor-pointer self-start sm:self-auto disabled:opacity-50"
-        >
-          {isLoading ? "Refreshing..." : "Refresh Trail ⟳"}
-        </button>
+        <div className="flex items-center gap-3 self-start sm:self-auto">
+          {integrity && (
+            <span
+              className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold uppercase border font-mono ${
+                integrity.valid
+                  ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/30"
+                  : "bg-rose-500/10 text-rose-400 border-rose-500/30"
+              }`}
+              title={integrity.message}
+            >
+              <span>{integrity.valid ? "✓" : "✕"}</span>
+              <span>Audit Integrity: {integrity.valid ? "Valid" : "Invalid"}</span>
+            </span>
+          )}
+
+          <button
+            type="button"
+            onClick={fetchLogs}
+            disabled={isLoading}
+            className="px-3.5 py-1.5 rounded-xl bg-dark-bg hover:bg-dark-bg/80 border border-dark-border text-slate-300 hover:text-white text-xs font-semibold transition-colors cursor-pointer disabled:opacity-50"
+          >
+            {isLoading ? "Refreshing..." : "Refresh Trail ⟳"}
+          </button>
+        </div>
       </div>
 
       {/* Filter Toolbar */}

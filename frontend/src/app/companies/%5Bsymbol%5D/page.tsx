@@ -30,23 +30,8 @@ export default async function CompanyDetailPage({ params }: { params: { symbol: 
   // Check if company is unpublished by admin
   const pubStatus = siteConfig.forecastPublication?.[company.symbol] || "published";
   const compConfig = siteConfig.companies?.[company.symbol];
-  if (pubStatus === "unpublished" || (compConfig && compConfig.visible === false)) {
-    // Graceful notice or notFound
-    return (
-      <div className="bg-dark-card border border-dark-border rounded-2xl p-12 text-center space-y-4 max-w-lg mx-auto">
-        <p className="text-4xl">🔒</p>
-        <h1 className="text-xl font-bold text-white">Forecast Temporarily Unpublished</h1>
-        <p className="text-xs text-slate-400 leading-relaxed">
-          The forecast for {company.symbol} is currently in draft or maintenance review by administrators.
-        </p>
-        <a
-          href="/companies"
-          className="inline-block px-4 py-2 bg-brand-600 hover:bg-brand-500 text-white rounded-xl text-xs font-semibold"
-        >
-          ← Return to Company Directory
-        </a>
-      </div>
-    );
+  if (pubStatus === "unpublished" || compConfig?.visible === false) {
+    notFound();
   }
 
   const modelOrder = ["lag_reg", "arima", "lstm", "naive"];
@@ -68,54 +53,52 @@ export default async function CompanyDetailPage({ params }: { params: { symbol: 
 
   const maseVal = parseFloat(String(selectedMetrics.mase));
   const beatsNaive = !isNaN(maseVal) && maseVal < 1.0;
-
   const isPositive = company.pctChange > 0;
   const isNegative = company.pctChange < 0;
 
   const features = siteConfig.features;
-  const layoutMode = siteConfig.layoutMode || "standard";
-  const isBeginner = layoutMode === "beginner";
+  const isBeginner = (siteConfig as any)?.layoutMode === "beginner";
 
   return (
     <div className="space-y-8">
-      {/* 1. Top Breadcrumb & Executive Title */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-dark-border/60">
+      {/* 1. Header & Quick Meta */}
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <a
             href="/companies"
-            className="text-xs font-semibold text-brand-400 hover:text-brand-300 transition-colors uppercase tracking-wider mb-2 inline-flex items-center gap-1"
+            className="text-xs font-semibold text-brand-600 dark:text-brand-400 hover:underline uppercase tracking-wider mb-1.5 inline-flex items-center gap-1"
           >
-            ← Back to Companies
+            ← Back to All Companies
           </a>
           <div className="flex items-center gap-3">
             <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
               {compConfig?.displayNameAlias || company.symbol}
             </h1>
-            <span className="text-xs px-3 py-1 rounded-full bg-dark-card border border-dark-border text-slate-300 font-medium">
+            <span className="text-xs px-3 py-1 rounded-full bg-dark-card border border-dark-border text-slate-700 dark:text-slate-200 font-semibold">
               {company.sector}
             </span>
           </div>
-          <p className="text-sm text-slate-400 mt-1">{company.name}</p>
+          <p className="text-sm font-medium text-slate-600 dark:text-slate-300 mt-1">{company.name}</p>
         </div>
 
         {/* Action button & Date context pill */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
           <BeginnerGuideModal />
 
-          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-slate-400 bg-dark-card border border-dark-border px-3.5 py-2 rounded-xl">
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs bg-dark-card border border-dark-border px-3.5 py-2 rounded-xl">
             {company.dataAsOf && (
               <div>
-                <span className="text-slate-500">Data as of: </span>
-                <strong className="text-slate-200 font-medium font-mono">
+                <span className="text-slate-600 dark:text-slate-300 font-medium">Data as of: </span>
+                <strong className="text-slate-800 dark:text-slate-100 font-semibold font-mono">
                   {formatDate(company.dataAsOf)}
                 </strong>
               </div>
             )}
-            {company.dataAsOf && company.forecastDate && <span>&middot;</span>}
+            {company.dataAsOf && company.forecastDate && <span className="text-slate-400 dark:text-slate-500">&middot;</span>}
             {company.forecastDate && (
               <div>
-                <span className="text-slate-500">Forecast for: </span>
-                <strong className="text-brand-300 font-semibold font-mono">
+                <span className="text-slate-600 dark:text-slate-300 font-medium">Forecast for: </span>
+                <strong className="text-brand-600 dark:text-brand-300 font-bold font-mono">
                   {formatDate(company.forecastDate)}
                 </strong>
               </div>
@@ -152,47 +135,47 @@ export default async function CompanyDetailPage({ params }: { params: { symbol: 
         {/* At a Glance Information Panel */}
         <div className="bg-dark-card border border-dark-border rounded-2xl p-6 shadow-sm">
           <div className="pb-3 border-b border-dark-border/60 mb-4 flex items-center justify-between">
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-slate-400">
+            <h3 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-slate-700 dark:text-slate-200">
               At a Glance
             </h3>
-            <span className="text-[11px] text-slate-500 font-mono">PSE Quotations Pipeline</span>
+            <span className="text-xs font-semibold text-slate-600 dark:text-slate-300 font-mono">PSE Quotations Pipeline</span>
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 text-xs">
             <div className="bg-dark-bg/80 border border-dark-border/80 rounded-xl p-3.5">
-              <span className="text-slate-500 block mb-0.5">Sector</span>
-              <span className="font-semibold text-white text-sm truncate block">{company.sector}</span>
+              <span className="text-[11px] font-medium text-slate-600 dark:text-slate-300 block mb-0.5">Sector</span>
+              <span className="font-bold text-white text-sm truncate block">{company.sector}</span>
             </div>
 
             <div className="bg-dark-bg/80 border border-dark-border/80 rounded-xl p-3.5">
-              <span className="text-slate-500 block mb-0.5">Last Settlement</span>
-              <span className="font-semibold text-white text-sm font-mono">
+              <span className="text-[11px] font-medium text-slate-600 dark:text-slate-300 block mb-0.5">Last Settlement</span>
+              <span className="font-bold text-white text-sm font-mono">
                 {formatDate(company.dataAsOf)}
               </span>
             </div>
 
             <div className="bg-dark-bg/80 border border-dark-border/80 rounded-xl p-3.5">
-              <span className="text-slate-500 block mb-0.5">Forecast Horizon</span>
-              <span className="font-semibold text-brand-300 text-sm">1 Trading Day</span>
+              <span className="text-[11px] font-medium text-slate-600 dark:text-slate-300 block mb-0.5">Forecast Horizon</span>
+              <span className="font-bold text-brand-600 dark:text-brand-300 text-sm">1 Trading Day</span>
             </div>
 
             <div className="bg-dark-bg/80 border border-dark-border/80 rounded-xl p-3.5">
-              <span className="text-slate-500 block mb-0.5">Selected Model</span>
-              <span className="font-semibold text-white text-sm truncate block" title={company.model}>
+              <span className="text-[11px] font-medium text-slate-600 dark:text-slate-300 block mb-0.5">Selected Model</span>
+              <span className="font-bold text-white text-sm truncate block" title={company.model}>
                 {company.model}
               </span>
             </div>
 
             <div className="bg-dark-bg/80 border border-dark-border/80 rounded-xl p-3.5">
-              <span className="text-slate-500 block mb-0.5">MASE Score</span>
-              <span className={`font-semibold text-sm font-mono ${beatsNaive ? "text-emerald-400" : "text-amber-400"}`}>
+              <span className="text-[11px] font-medium text-slate-600 dark:text-slate-300 block mb-0.5">MASE Score</span>
+              <span className={`font-bold text-sm font-mono ${beatsNaive ? "text-emerald-400" : "text-amber-400"}`}>
                 {formatNum(selectedMetrics.mase, 3)}
               </span>
             </div>
 
             <div className="bg-dark-bg/80 border border-dark-border/80 rounded-xl p-3.5">
-              <span className="text-slate-500 block mb-0.5">Forecast Direction</span>
-              <span className={`font-semibold text-sm ${isPositive ? "text-emerald-400" : isNegative ? "text-rose-400" : "text-slate-300"}`}>
+              <span className="text-[11px] font-medium text-slate-600 dark:text-slate-300 block mb-0.5">Forecast Direction</span>
+              <span className={`font-bold text-sm ${isPositive ? "text-emerald-400" : isNegative ? "text-rose-400" : "text-slate-300"}`}>
                 {isPositive ? "↑ Gain" : isNegative ? "↓ Loss" : "→ Flat"} ({formatPct(company.pctChange)})
               </span>
             </div>
@@ -209,7 +192,7 @@ export default async function CompanyDetailPage({ params }: { params: { symbol: 
                 <h2 className="text-lg font-bold text-white tracking-tight">
                   Historical OHLCV Data
                 </h2>
-                <p className="text-xs text-slate-400 mt-0.5">
+                <p className="text-xs font-medium text-slate-600 dark:text-slate-300 mt-0.5">
                   Official historical Open, High, Low, Close, and Volume time-series sourced from PSE reports.
                 </p>
               </div>
@@ -231,8 +214,8 @@ export default async function CompanyDetailPage({ params }: { params: { symbol: 
                 <h2 className="text-lg font-bold text-white tracking-tight">
                   Next-Day Prediction vs Recent Trend
                 </h2>
-                <p className="text-xs text-slate-400 mt-0.5">
-                  Latest actual closing prices alongside step-ahead model estimates for tomorrow&apos;s session.
+                <p className="text-xs font-medium text-slate-600 dark:text-slate-300 mt-0.5">
+                  Latest actual close alongside step-ahead model estimates for tomorrow&apos;s session.
                 </p>
               </div>
               <div className="flex items-center gap-2 self-start sm:self-auto">
@@ -259,7 +242,7 @@ export default async function CompanyDetailPage({ params }: { params: { symbol: 
                 <h2 className="text-lg font-bold text-white tracking-tight">
                   Backtest: Predicted vs. Actual (Held-Out Test Window)
                 </h2>
-                <p className="text-xs text-slate-400 mt-0.5">
+                <p className="text-xs font-medium text-slate-600 dark:text-slate-300 mt-0.5">
                   Chronological out-of-sample backtest comparing step-ahead predictions with actual settlement prices.
                 </p>
               </div>
@@ -286,7 +269,7 @@ export default async function CompanyDetailPage({ params }: { params: { symbol: 
                 <h2 className="text-lg font-bold text-white tracking-tight">
                   Forecast Error Over Time (Residuals)
                 </h2>
-                <p className="text-xs text-slate-400 mt-0.5">
+                <p className="text-xs font-medium text-slate-600 dark:text-slate-300 mt-0.5">
                   Session-by-session forecast residuals across the backtest window: Predicted Close − Actual Close (₱).
                 </p>
               </div>
@@ -311,13 +294,13 @@ export default async function CompanyDetailPage({ params }: { params: { symbol: 
             <h2 className="text-lg font-bold text-white tracking-tight">
               Advanced Model Performance Details for {company.symbol}
             </h2>
-            <p className="text-xs text-slate-400 mt-1">
+            <p className="text-xs font-medium text-slate-600 dark:text-slate-300 mt-1">
               Out-of-sample evaluation metrics across all machine-learning candidate architectures and the naive baseline.
             </p>
           </div>
 
           <table className="w-full text-sm">
-            <thead className="text-xs text-slate-400 uppercase bg-dark-bg/80 border-b border-dark-border">
+            <thead className="text-xs font-semibold text-slate-600 dark:text-slate-300 uppercase bg-dark-bg/80 border-b border-dark-border">
               <tr>
                 <th className="text-left py-2.5 px-3">Model</th>
                 <th className="text-right py-2.5 px-3">RMSE (₱)</th>
@@ -344,30 +327,30 @@ export default async function CompanyDetailPage({ params }: { params: { symbol: 
                       }`}
                     >
                       <td className="py-3 px-3 text-white flex items-center gap-2">
-                        <span>{modelLabels[m]}</span>
+                        <span className="font-semibold">{modelLabels[m]}</span>
                         {isSelected && (
-                          <span className="text-[10px] uppercase font-bold text-brand-400 border border-brand-500/40 bg-brand-500/20 rounded px-2 py-0.5">
+                          <span className="text-[10px] uppercase font-bold text-brand-600 dark:text-brand-300 border border-brand-500/40 bg-brand-500/20 rounded px-2 py-0.5">
                             Selected Winner
                           </span>
                         )}
                         {isNaive && (
-                          <span className="text-[10px] uppercase font-bold text-slate-400 border border-slate-600 bg-dark-bg rounded px-2 py-0.5">
+                          <span className="text-[10px] uppercase font-bold text-slate-600 dark:text-slate-300 border border-slate-600 bg-dark-bg rounded px-2 py-0.5">
                             Benchmark
                           </span>
                         )}
                       </td>
-                      <td className="text-right py-3 px-3 font-mono text-slate-200">
+                      <td className="text-right py-3 px-3 font-mono font-semibold text-slate-800 dark:text-slate-100">
                         ₱{formatNum(company.metrics[m].rmse)}
                       </td>
-                      <td className="text-right py-3 px-3 font-mono text-slate-200">
+                      <td className="text-right py-3 px-3 font-mono font-semibold text-slate-800 dark:text-slate-100">
                         ₱{formatNum(company.metrics[m].mae)}
                       </td>
                       <td className="text-right py-3 px-3 font-mono">
-                        <span className={rowBeatsNaive ? "text-emerald-400 font-semibold" : "text-slate-300"}>
+                        <span className={rowBeatsNaive ? "text-emerald-400 font-bold" : "text-slate-700 dark:text-slate-200 font-semibold"}>
                           {formatNum(company.metrics[m].mase)}
                         </span>
                       </td>
-                      <td className="text-right py-3 px-3 font-mono text-slate-200">
+                      <td className="text-right py-3 px-3 font-mono font-semibold text-slate-800 dark:text-slate-100">
                         {formatNum(company.metrics[m].r2)}
                       </td>
                       <td className="text-center py-3 px-3">
@@ -389,17 +372,17 @@ export default async function CompanyDetailPage({ params }: { params: { symbol: 
             </tbody>
           </table>
 
-          <div className="mt-4 pt-3 border-t border-dark-border/60 text-xs text-slate-400 space-y-1.5 leading-relaxed">
+          <div className="mt-4 pt-3 border-t border-dark-border/60 text-xs text-slate-600 dark:text-slate-300 space-y-1.5 leading-relaxed">
             <p>
-              &bull; <strong className="text-slate-300">Selection Criterion: </strong>
+              &bull; <strong className="text-slate-800 dark:text-slate-100 font-semibold">Selection Criterion: </strong>
               Autonomous selection is governed strictly by the lowest test-set RMSE on the 15% chronological held-out test split.
             </p>
             <p>
-              &bull; <strong className="text-slate-300">MASE Benchmark: </strong>
+              &bull; <strong className="text-slate-800 dark:text-slate-100 font-semibold">MASE Benchmark: </strong>
               Mean Absolute Scaled Error &lt; 1.0 indicates higher predictive accuracy than the naive persistence baseline (tomorrow&apos;s price equals today&apos;s price).
             </p>
             <p>
-              &bull; <strong className="text-slate-300">R² Interpretation: </strong>
+              &bull; <strong className="text-slate-800 dark:text-slate-100 font-semibold">R² Interpretation: </strong>
               Measures test-set explained variance in price levels and is not a forecast probability or confidence score.
             </p>
           </div>
