@@ -228,16 +228,16 @@ export async function GET() {
       name: "Gemini AI Assistant",
       status: lastGeminiStatus.status,
       message: lastGeminiStatus.message,
-      details: "Primary: gemini-2.5-flash | Fallback: gemini-2.5-flash-lite (Cached Probe)",
+      details: "Primary: gemini-3.5-flash-lite | Fallback: gemini-3.5-flash (Cached Probe)",
       latencyMs: lastGeminiStatus.latencyMs,
       lastChecked: new Date(lastGeminiCheckTime).toISOString(),
     };
   } else {
     const aiStart = performance.now();
     try {
-      // Lightweight verification of Gemini API accessibility
+      // Lightweight verification of Gemini API accessibility with Gemini 3.5
       const probeRes = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash?key=${geminiApiKey}`,
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite?key=${geminiApiKey}`,
         { method: "GET", cache: "no-store" }
       );
       const aiLatency = Math.round(performance.now() - aiStart);
@@ -246,14 +246,14 @@ export async function GET() {
         lastGeminiCheckTime = now;
         lastGeminiStatus = {
           status: "healthy",
-          message: "Gemini 2.5 Flash model verified and operational.",
+          message: "Gemini 3.5 Flash-Lite model verified and operational.",
           latencyMs: aiLatency,
         };
         checks.ai = {
           name: "Gemini AI Assistant",
           status: "healthy",
           message: lastGeminiStatus.message,
-          details: `Primary: gemini-2.5-flash | Latency: ${aiLatency}ms`,
+          details: `Primary: gemini-3.5-flash-lite | Latency: ${aiLatency}ms`,
           latencyMs: aiLatency,
           lastChecked: timestamp,
         };

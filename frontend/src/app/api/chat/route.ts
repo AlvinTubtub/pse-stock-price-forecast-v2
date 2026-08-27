@@ -6,8 +6,8 @@ import { getSiteConfig } from "@/lib/admin/config";
 
 export const dynamic = "force-dynamic";
 
-const DEFAULT_PRIMARY_MODEL = "gemini-2.5-flash";
-const DEFAULT_FALLBACK_MODEL = "gemini-2.5-flash-lite";
+const DEFAULT_PRIMARY_MODEL = "gemini-3.5-flash-lite";
+const DEFAULT_FALLBACK_MODEL = "gemini-3.5-flash";
 const MAX_MESSAGE_LENGTH = 1000;
 const MAX_HISTORY_TURNS = 6;
 
@@ -65,7 +65,7 @@ async function generateWithResilience(
 
   let primaryFailed = false;
 
-  // Attempt 1: Configured Primary Model
+  // Attempt 1: Configured Primary Model (gemini-3.5-flash-lite)
   try {
     const response = await ai.models.generateContent({
       model: primary,
@@ -117,7 +117,7 @@ async function generateWithResilience(
     }
   }
 
-  // Attempt 3: Configured Fallback Model
+  // Attempt 3: Configured Fallback Model (gemini-3.5-flash)
   if (primaryFailed) {
     try {
       const response = await ai.models.generateContent({
@@ -217,9 +217,11 @@ export async function POST(req: NextRequest) {
       parts: [{ text: cleanMessage }],
     });
 
-    // 5. Invoke Gemini API with dynamic model selection and resilience
-    const primaryModel = siteConfig.ai?.primaryModel || DEFAULT_PRIMARY_MODEL;
-    const fallbackModel = siteConfig.ai?.fallbackModel || DEFAULT_FALLBACK_MODEL;
+    // 5. Invoke Gemini API with dynamic model selection and resilience (Gemini 3.5)
+    const rawPrimary = siteConfig.ai?.primaryModel;
+    const rawFallback = siteConfig.ai?.fallbackModel;
+    const primaryModel = (!rawPrimary || rawPrimary.includes("gemini-2.5")) ? DEFAULT_PRIMARY_MODEL : rawPrimary;
+    const fallbackModel = (!rawFallback || rawFallback.includes("gemini-2.5")) ? DEFAULT_FALLBACK_MODEL : rawFallback;
 
     const ai = new GoogleGenAI({ apiKey });
     const replyText = await generateWithResilience(

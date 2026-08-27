@@ -7,8 +7,8 @@ export default function AIAdminPage() {
   const [config, setConfig] = useState<SiteConfig | null>(null);
   const [aiConfig, setAiConfig] = useState<AIConfig>({
     enabled: true,
-    primaryModel: "gemini-2.5-flash",
-    fallbackModel: "gemini-2.5-flash-lite",
+    primaryModel: "gemini-3.5-flash-lite",
+    fallbackModel: "gemini-3.5-flash",
     customGuidelines:
       "Strictly adhere to educational explanations. Do not provide financial advice, buy/sell recommendations, or price guarantees.",
   });
@@ -23,8 +23,8 @@ export default function AIAdminPage() {
           setConfig(data.config);
           setAiConfig(data.config.ai || {
             enabled: true,
-            primaryModel: "gemini-2.5-flash",
-            fallbackModel: "gemini-2.5-flash-lite",
+            primaryModel: "gemini-3.5-flash-lite",
+            fallbackModel: "gemini-3.5-flash",
             customGuidelines:
               "Strictly adhere to educational explanations. Do not provide financial advice, buy/sell recommendations, or price guarantees.",
           });

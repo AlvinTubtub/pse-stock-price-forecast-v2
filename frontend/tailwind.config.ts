@@ -6,7 +6,8 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["var(--font-inter)", "Inter", "-apple-system", "BlinkMacSystemFont", "sans-serif"],
+        sans: ["Arial", "Helvetica", "sans-serif"],
+        mono: ["Arial", "Helvetica", "sans-serif"],
       },
       colors: {
         foreground: {

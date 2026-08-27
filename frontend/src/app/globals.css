@@ -2,6 +2,33 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ==============================================================================
+   GLOBAL FONT DECLARATIONS — ARIAL, HELVETICA, SANS-SERIF
+   Enforces Arial across all elements, components, charts, and admin views
+   ============================================================================== */
+*,
+*::before,
+*::after {
+  font-family: Arial, Helvetica, sans-serif !important;
+}
+
+html,
+body {
+  font-family: Arial, Helvetica, sans-serif !important;
+}
+
+h1, h2, h3, h4, h5, h6,
+p, span, a, label, strong, b, em, i,
+button, input, select, textarea, optgroup, option,
+table, thead, tbody, tfoot, tr, th, td,
+ul, ol, li, dl, dt, dd,
+blockquote, pre, code, kbd, samp,
+form, fieldset, legend,
+dialog,
+nav, header, footer, section, article, aside, main, div {
+  font-family: Arial, Helvetica, sans-serif !important;
+}
+
 :root {
   /* Core layout backgrounds & borders */
   --color-bg: #f8fafc;
@@ -99,6 +126,7 @@ html {
 body {
   background-color: var(--color-bg);
   color: var(--foreground-secondary);
+  font-family: Arial, Helvetica, sans-serif !important;
   transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
@@ -296,18 +324,31 @@ input[type="date"] {
 }
 
 /* ==============================================================================
-   RECHARTS SVG THEMING & TEXT READABILITY
+   RECHARTS SVG THEMING & TEXT READABILITY (ARIAL)
    ============================================================================== */
 .recharts-cartesian-grid line {
   stroke: var(--chart-grid) !important;
 }
+svg text,
+svg tspan,
+.recharts-wrapper,
+.recharts-surface,
 .recharts-text,
 .recharts-label,
-.recharts-cartesian-axis-tick text {
+.recharts-cartesian-axis-tick text,
+.recharts-cartesian-axis-tick-value {
+  font-family: Arial, Helvetica, sans-serif !important;
   fill: var(--chart-tick) !important;
 }
 .recharts-legend-item-text {
+  font-family: Arial, Helvetica, sans-serif !important;
   color: var(--foreground-secondary) !important;
+}
+
+.recharts-default-tooltip,
+.recharts-tooltip-item,
+.recharts-tooltip-label {
+  font-family: Arial, Helvetica, sans-serif !important;
 }
 
 html:not(.dark) .recharts-default-tooltip {

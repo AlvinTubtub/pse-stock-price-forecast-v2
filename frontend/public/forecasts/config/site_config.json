@@ -1,6 +1,6 @@
 {
-  "version": 4,
-  "lastUpdated": "2026-08-21T11:44:24.850Z",
+  "version": 5,
+  "lastUpdated": "2026-08-27T02:21:31.268Z",
   "updatedBy": "admin1",
   "layoutMode": "standard",
   "features": {
@@ -202,8 +202,8 @@
   },
   "ai": {
     "enabled": true,
-    "primaryModel": "gemini-2.5-flash",
-    "fallbackModel": "gemini-2.5-flash-lite",
+    "primaryModel": "gemini-3.5-flash-lite",
+    "fallbackModel": "gemini-3.5-flash",
     "customGuidelines": "Strictly adhere to educational explanations. Do not provide financial advice, buy/sell recommendations, or price guarantees."
   },
   "customHolidays": []

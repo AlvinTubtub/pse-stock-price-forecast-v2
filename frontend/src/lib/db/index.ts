@@ -124,13 +124,22 @@ export async function ensureDatabaseInitialized(): Promise<boolean> {
         CREATE TABLE IF NOT EXISTS ai_config (
             config_id VARCHAR(50) PRIMARY KEY REFERENCES site_config(id) ON DELETE CASCADE,
             enabled BOOLEAN NOT NULL DEFAULT TRUE,
-            primary_model VARCHAR(100) NOT NULL DEFAULT 'gemini-2.5-flash',
-            fallback_model VARCHAR(100) NOT NULL DEFAULT 'gemini-2.5-flash-lite',
+            primary_model VARCHAR(100) NOT NULL DEFAULT 'gemini-3.5-flash-lite',
+            fallback_model VARCHAR(100) NOT NULL DEFAULT 'gemini-3.5-flash',
             custom_guidelines TEXT,
             starter_questions JSONB,
             updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
             updated_by VARCHAR(100) NOT NULL DEFAULT 'system'
         );
+
+        -- Safe model migration: Upgrade legacy gemini-2.5 models to gemini-3.5
+        UPDATE ai_config
+        SET primary_model = 'gemini-3.5-flash-lite'
+        WHERE primary_model LIKE '%gemini-2.5%';
+
+        UPDATE ai_config
+        SET fallback_model = 'gemini-3.5-flash'
+        WHERE fallback_model LIKE '%gemini-2.5%';
 
         CREATE TABLE IF NOT EXISTS tracked_companies (
             config_id VARCHAR(50) NOT NULL REFERENCES site_config(id) ON DELETE CASCADE,

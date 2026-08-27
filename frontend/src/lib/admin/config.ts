@@ -90,13 +90,20 @@ export function getDefaultConfig(): SiteConfig {
     },
     ai: {
       enabled: true,
-      primaryModel: "gemini-2.5-flash",
-      fallbackModel: "gemini-2.5-flash-lite",
+      primaryModel: "gemini-3.5-flash-lite",
+      fallbackModel: "gemini-3.5-flash",
       customGuidelines:
         "Strictly adhere to educational explanations. Do not provide financial advice, buy/sell recommendations, or price guarantees.",
     },
     customHolidays: [],
   };
+}
+
+function normalizeAiModel(model: string | undefined, defaultModel: string): string {
+  if (!model || model.trim() === "" || model.includes("gemini-2.5")) {
+    return defaultModel;
+  }
+  return model.trim();
 }
 
 let inMemoryPublishedConfig: SiteConfig | null = null;
@@ -202,8 +209,8 @@ export async function getSiteConfig(draft = false): Promise<SiteConfig> {
         const aRow = aiRows[0] || {};
         const ai: AIConfig = {
           enabled: Boolean(aRow.enabled ?? true),
-          primaryModel: aRow.primary_model || "gemini-2.5-flash",
-          fallbackModel: aRow.fallback_model || "gemini-2.5-flash-lite",
+          primaryModel: normalizeAiModel(aRow.primary_model, "gemini-3.5-flash-lite"),
+          fallbackModel: normalizeAiModel(aRow.fallback_model, "gemini-3.5-flash"),
           customGuidelines: aRow.custom_guidelines || undefined,
           starterQuestions: aRow.starter_questions || undefined,
         };
@@ -407,8 +414,8 @@ async function saveSiteConfigToDatabase(
       [
         configId,
         Boolean(a.enabled),
-        a.primaryModel || "gemini-2.5-flash",
-        a.fallbackModel || "gemini-2.5-flash-lite",
+        normalizeAiModel(a.primaryModel, "gemini-3.5-flash-lite"),
+        normalizeAiModel(a.fallbackModel, "gemini-3.5-flash"),
         a.customGuidelines || null,
         JSON.stringify(a.starterQuestions || {}),
         now,

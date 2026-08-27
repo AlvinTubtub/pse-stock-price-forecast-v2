@@ -215,7 +215,7 @@ export default function AdminDashboardPage() {
           </div>
           <div>
             <p className="text-xl font-bold text-white tracking-tight">Active</p>
-            <p className="text-xs text-slate-400 mt-1">Model: gemini-2.5-flash</p>
+            <p className="text-xs text-slate-400 mt-1">Model: gemini-3.5-flash-lite</p>
           </div>
           <div className="pt-2 border-t border-dark-border/60 flex items-center justify-between text-[11px]">
             <span className="text-slate-500">Guardrails</span>
