@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-08-26T16:39:21.909524+08:00",
-  "forecastDate": "2026-08-27",
-  "lastRunAt": "2026-08-26T08:39:21+00:00",
+  "generatedAt": "2026-08-27T16:10:08.567417+08:00",
+  "forecastDate": "2026-08-28",
+  "lastRunAt": "2026-08-27T08:10:08+00:00",
   "status": "ok",
   "totalCompanies": 15,
   "missingCompanies": [],
@@ -28,32 +28,32 @@
     }
   ],
   "marketSummary": {
-    "gainers": 9,
-    "losers": 6,
-    "unchanged": 0
+    "gainers": 10,
+    "losers": 4,
+    "unchanged": 1
   },
   "topGainer": {
-    "symbol": "GLO",
-    "name": "Globe Telecom, Inc.",
+    "symbol": "ICT",
+    "name": "Intl. Container Terminal Services",
     "sector": "Services",
-    "latestClose": 1670.0,
-    "predictedClose": 1734.9,
-    "pctChange": 3.89,
+    "latestClose": 881.0,
+    "predictedClose": 936.85,
+    "pctChange": 6.34,
     "direction": "bullish",
-    "bestModel": "Lag-Informed Regression",
-    "confidence": 94.4,
-    "forecastDate": "2026-08-27"
+    "bestModel": "ARIMA",
+    "confidence": 98.9,
+    "forecastDate": "2026-08-28"
   },
   "topLoser": {
     "symbol": "APX",
     "name": "Apex Mining Co., Inc.",
     "sector": "Mining and Oil",
-    "latestClose": 16.0,
+    "latestClose": 15.74,
     "predictedClose": 14.19,
-    "pctChange": -11.31,
+    "pctChange": -9.85,
     "direction": "bearish",
     "bestModel": "Lag-Informed Regression",
     "confidence": 96.5,
-    "forecastDate": "2026-08-27"
+    "forecastDate": "2026-08-28"
   }
 }
