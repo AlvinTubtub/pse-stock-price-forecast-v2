@@ -2,10 +2,10 @@
   "symbol": "ALI",
   "name": "Ayala Land, Inc.",
   "sector": "Property",
-  "previousClose": 15.5,
+  "previousClose": 15.54,
   "predictedClose": 15.28,
-  "pesoChange": -0.22,
-  "pctChange": -1.42,
+  "pesoChange": -0.26,
+  "pctChange": -1.67,
   "direction": "bearish",
   "model": "Lag-Informed Regression",
   "confidence": 98.6,
@@ -13025,10 +13025,17 @@
       "low": 15.2,
       "close": 15.5,
       "volume": 408545118
+    },
+    {
+      "date": "2026-08-28",
+      "open": 15.32,
+      "high": 15.76,
+      "low": 14.84,
+      "close": 15.54,
+      "volume": 7229555598
     }
   ],
   "backtestDates": [
-    "2026-06-03",
     "2026-06-04",
     "2026-06-05",
     "2026-06-08",
@@ -13087,10 +13094,10 @@
     "2026-08-24",
     "2026-08-25",
     "2026-08-26",
-    "2026-08-27"
+    "2026-08-27",
+    "2026-08-28"
   ],
   "backtestActual": [
-    14.7,
     14.0,
     14.16,
     13.6,
@@ -13149,7 +13156,8 @@
     15.2,
     15.8,
     15.4,
-    15.5
+    15.5,
+    15.54
   ],
   "backtestByModel": {
     "Lag-Informed Regression": [
@@ -13339,7 +13347,6 @@
       16.270581364631653
     ],
     "Naive baseline": [
-      14.54,
       14.7,
       14.0,
       14.16,
@@ -13398,10 +13405,11 @@
       15.12,
       15.2,
       15.8,
-      15.4
+      15.4,
+      15.5
     ]
   },
-  "forecastDate": "2026-08-28",
+  "forecastDate": "2026-09-01",
   "dataAsOf": null,
   "inferenceAt": null
 }
