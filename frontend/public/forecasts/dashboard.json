@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-28T22:04:02.363739+08:00",
+  "generatedAt": "2026-08-30T14:33:22.431243+08:00",
   "forecastDate": "2026-09-01",
   "lastRunAt": "2026-08-28T14:04:01+00:00",
   "status": "ok",
@@ -28,32 +28,32 @@
     }
   ],
   "marketSummary": {
-    "gainers": 11,
-    "losers": 4,
-    "unchanged": 0
+    "gainers": 5,
+    "losers": 7,
+    "unchanged": 3
   },
   "topGainer": {
     "symbol": "BPI",
     "name": "Bank of the Philippine Islands",
     "sector": "Financials",
     "latestClose": 100.0,
-    "predictedClose": 107.3,
-    "pctChange": 7.3,
+    "predictedClose": 100.79,
+    "pctChange": 0.79,
     "direction": "bullish",
     "bestModel": "ARIMA",
     "confidence": 93.9,
     "forecastDate": "2026-09-01"
   },
   "topLoser": {
-    "symbol": "APX",
-    "name": "Apex Mining Co., Inc.",
+    "symbol": "SCC",
+    "name": "Semirara Mining and Power Corp.",
     "sector": "Mining and Oil",
-    "latestClose": 16.22,
-    "predictedClose": 14.19,
-    "pctChange": -12.52,
+    "latestClose": 17.2,
+    "predictedClose": 17.14,
+    "pctChange": -0.35,
     "direction": "bearish",
-    "bestModel": "Lag-Informed Regression",
-    "confidence": 96.5,
+    "bestModel": "ARIMA",
+    "confidence": 97.1,
     "forecastDate": "2026-09-01"
   }
 }
