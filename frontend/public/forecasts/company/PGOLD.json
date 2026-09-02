@@ -2,11 +2,11 @@
   "symbol": "PGOLD",
   "name": "Puregold Price Club, Inc.",
   "sector": "Services",
-  "previousClose": 41.05,
+  "previousClose": 40.0,
   "predictedClose": 40.94,
-  "pesoChange": -0.11,
-  "pctChange": -0.27,
-  "direction": "bearish",
+  "pesoChange": 0.94,
+  "pctChange": 2.35,
+  "direction": "bullish",
   "model": "ARIMA",
   "confidence": 89.8,
   "metrics": {
@@ -13033,11 +13033,25 @@
       "low": 38.7,
       "close": 41.05,
       "volume": 129450185
+    },
+    {
+      "date": "2026-09-01",
+      "open": 40.45,
+      "high": 40.7,
+      "low": 39.75,
+      "close": 40.25,
+      "volume": 64521470
+    },
+    {
+      "date": "2026-09-02",
+      "open": 40.0,
+      "high": 40.25,
+      "low": 39.55,
+      "close": 40.0,
+      "volume": 30843145
     }
   ],
   "backtestDates": [
-    "2026-06-04",
-    "2026-06-05",
     "2026-06-08",
     "2026-06-09",
     "2026-06-10",
@@ -13095,11 +13109,11 @@
     "2026-08-25",
     "2026-08-26",
     "2026-08-27",
-    "2026-08-28"
+    "2026-08-28",
+    "2026-09-01",
+    "2026-09-02"
   ],
   "backtestActual": [
-    46.0,
-    46.4,
     45.0,
     45.85,
     46.15,
@@ -13157,7 +13171,9 @@
     40.75,
     40.0,
     39.5,
-    41.05
+    41.05,
+    40.25,
+    40.0
   ],
   "backtestByModel": {
     "Lag-Informed Regression": [
@@ -13347,8 +13363,6 @@
       40.40379598736763
     ],
     "Naive baseline": [
-      46.85,
-      46.0,
       46.4,
       45.0,
       45.85,
@@ -13406,10 +13420,12 @@
       40.3,
       40.75,
       40.0,
-      39.5
+      39.5,
+      41.05,
+      40.25
     ]
   },
-  "forecastDate": "2026-09-01",
+  "forecastDate": "2026-09-03",
   "dataAsOf": null,
   "inferenceAt": null
 }

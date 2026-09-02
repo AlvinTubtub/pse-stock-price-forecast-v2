@@ -2,11 +2,11 @@
   "symbol": "SECB",
   "name": "Security Bank Corporation",
   "sector": "Financials",
-  "previousClose": 63.8,
+  "previousClose": 63.65,
   "predictedClose": 63.73,
-  "pesoChange": -0.07,
-  "pctChange": -0.11,
-  "direction": "bearish",
+  "pesoChange": 0.08,
+  "pctChange": 0.13,
+  "direction": "bullish",
   "model": "Lag-Informed Regression",
   "confidence": 89.9,
   "metrics": {
@@ -13033,11 +13033,25 @@
       "low": 63.6,
       "close": 63.8,
       "volume": 13252103
+    },
+    {
+      "date": "2026-09-01",
+      "open": 63.8,
+      "high": 64.3,
+      "low": 63.6,
+      "close": 63.8,
+      "volume": 5582843
+    },
+    {
+      "date": "2026-09-02",
+      "open": 63.8,
+      "high": 64.1,
+      "low": 63.6,
+      "close": 63.65,
+      "volume": 4344597
     }
   ],
   "backtestDates": [
-    "2026-06-04",
-    "2026-06-05",
     "2026-06-08",
     "2026-06-09",
     "2026-06-10",
@@ -13095,11 +13109,11 @@
     "2026-08-25",
     "2026-08-26",
     "2026-08-27",
-    "2026-08-28"
+    "2026-08-28",
+    "2026-09-01",
+    "2026-09-02"
   ],
   "backtestActual": [
-    62.4,
-    62.7,
     61.55,
     61.5,
     63.1,
@@ -13157,7 +13171,9 @@
     66.95,
     66.2,
     65.05,
-    63.8
+    63.8,
+    63.8,
+    63.65
   ],
   "backtestByModel": {
     "Lag-Informed Regression": [
@@ -13347,8 +13363,6 @@
       74.70329666137695
     ],
     "Naive baseline": [
-      62.95,
-      62.4,
       62.7,
       61.55,
       61.5,
@@ -13406,10 +13420,12 @@
       65.65,
       66.95,
       66.2,
-      65.05
+      65.05,
+      63.8,
+      63.8
     ]
   },
-  "forecastDate": "2026-09-01",
+  "forecastDate": "2026-09-03",
   "dataAsOf": null,
   "inferenceAt": null
 }

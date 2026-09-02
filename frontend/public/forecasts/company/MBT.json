@@ -2,11 +2,11 @@
   "symbol": "MBT",
   "name": "Metropolitan Bank & Trust Co.",
   "sector": "Financials",
-  "previousClose": 66.7,
+  "previousClose": 65.3,
   "predictedClose": 66.62,
-  "pesoChange": -0.08,
-  "pctChange": -0.12,
-  "direction": "bearish",
+  "pesoChange": 1.32,
+  "pctChange": 2.02,
+  "direction": "bullish",
   "model": "Lag-Informed Regression",
   "confidence": 86.3,
   "metrics": {
@@ -13033,11 +13033,25 @@
       "low": 64.75,
       "close": 66.7,
       "volume": 500009634
+    },
+    {
+      "date": "2026-09-01",
+      "open": 66.7,
+      "high": 66.8,
+      "low": 66.0,
+      "close": 66.4,
+      "volume": 340155211
+    },
+    {
+      "date": "2026-09-02",
+      "open": 66.4,
+      "high": 66.65,
+      "low": 64.95,
+      "close": 65.3,
+      "volume": 214930194
     }
   ],
   "backtestDates": [
-    "2026-06-04",
-    "2026-06-05",
     "2026-06-08",
     "2026-06-09",
     "2026-06-10",
@@ -13095,11 +13109,11 @@
     "2026-08-25",
     "2026-08-26",
     "2026-08-27",
-    "2026-08-28"
+    "2026-08-28",
+    "2026-09-01",
+    "2026-09-02"
   ],
   "backtestActual": [
-    63.8,
-    64.4,
     63.1,
     62.9,
     64.0,
@@ -13157,7 +13171,9 @@
     67.65,
     67.55,
     65.75,
-    66.7
+    66.7,
+    66.4,
+    65.3
   ],
   "backtestByModel": {
     "Lag-Informed Regression": [
@@ -13347,8 +13363,6 @@
       69.99607133865356
     ],
     "Naive baseline": [
-      63.0,
-      63.8,
       64.4,
       63.1,
       62.9,
@@ -13406,10 +13420,12 @@
       67.7,
       67.65,
       67.55,
-      65.75
+      65.75,
+      66.7,
+      66.4
     ]
   },
-  "forecastDate": "2026-09-01",
+  "forecastDate": "2026-09-03",
   "dataAsOf": null,
   "inferenceAt": null
 }

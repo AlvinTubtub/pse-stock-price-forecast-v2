@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-08-30T14:33:22.431243+08:00",
-  "forecastDate": "2026-09-01",
-  "lastRunAt": "2026-08-28T14:04:01+00:00",
+  "generatedAt": "2026-09-02T15:49:37.730239+08:00",
+  "forecastDate": "2026-09-03",
+  "lastRunAt": "2026-09-02T07:49:37+00:00",
   "status": "ok",
   "totalCompanies": 15,
   "missingCompanies": [],
@@ -28,32 +28,32 @@
     }
   ],
   "marketSummary": {
-    "gainers": 5,
-    "losers": 7,
-    "unchanged": 3
+    "gainers": 10,
+    "losers": 5,
+    "unchanged": 0
   },
   "topGainer": {
-    "symbol": "BPI",
-    "name": "Bank of the Philippine Islands",
-    "sector": "Financials",
-    "latestClose": 100.0,
-    "predictedClose": 100.79,
-    "pctChange": 0.79,
+    "symbol": "SHLPH",
+    "name": "Pilipinas Shell Petroleum Corp.",
+    "sector": "Industrial",
+    "latestClose": 7.7,
+    "predictedClose": 8.25,
+    "pctChange": 7.14,
     "direction": "bullish",
     "bestModel": "ARIMA",
-    "confidence": 93.9,
-    "forecastDate": "2026-09-01"
+    "confidence": 97.7,
+    "forecastDate": "2026-09-03"
   },
   "topLoser": {
-    "symbol": "SCC",
-    "name": "Semirara Mining and Power Corp.",
-    "sector": "Mining and Oil",
-    "latestClose": 17.2,
-    "predictedClose": 17.14,
-    "pctChange": -0.35,
+    "symbol": "ICT",
+    "name": "Intl. Container Terminal Services",
+    "sector": "Services",
+    "latestClose": 932.5,
+    "predictedClose": 888.82,
+    "pctChange": -4.68,
     "direction": "bearish",
     "bestModel": "ARIMA",
-    "confidence": 97.1,
-    "forecastDate": "2026-09-01"
+    "confidence": 98.9,
+    "forecastDate": "2026-09-03"
   }
 }

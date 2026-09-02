@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-08-30T14:33:22.431243+08:00",
-  "forecastDate": "2026-09-01",
-  "lastRunAt": "2026-08-28T14:04:01+00:00",
+  "generatedAt": "2026-09-02T15:49:37.730239+08:00",
+  "forecastDate": "2026-09-03",
+  "lastRunAt": "2026-09-02T07:49:37+00:00",
   "status": "ok",
   "aggregate": {
     "Lag-Informed Regression": {
