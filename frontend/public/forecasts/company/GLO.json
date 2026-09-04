@@ -2,10 +2,10 @@
   "symbol": "GLO",
   "name": "Globe Telecom, Inc.",
   "sector": "Services",
-  "previousClose": 1583.0,
+  "previousClose": 1610.0,
   "predictedClose": 1629.83,
-  "pesoChange": 46.83,
-  "pctChange": 2.96,
+  "pesoChange": 19.83,
+  "pctChange": 1.23,
   "direction": "bullish",
   "model": "Lag-Informed Regression",
   "confidence": 94.3,
@@ -13057,10 +13057,17 @@
       "low": 1556.0,
       "close": 1583.0,
       "volume": 181368295
+    },
+    {
+      "date": "2026-09-04",
+      "open": 1591.0,
+      "high": 1615.0,
+      "low": 1591.0,
+      "close": 1610.0,
+      "volume": 73374255
     }
   ],
   "backtestDates": [
-    "2026-06-09",
     "2026-06-10",
     "2026-06-11",
     "2026-06-15",
@@ -13119,10 +13126,10 @@
     "2026-08-28",
     "2026-09-01",
     "2026-09-02",
-    "2026-09-03"
+    "2026-09-03",
+    "2026-09-04"
   ],
   "backtestActual": [
-    1706.0,
     1705.0,
     1700.0,
     1730.0,
@@ -13181,7 +13188,8 @@
     1630.0,
     1601.0,
     1592.0,
-    1583.0
+    1583.0,
+    1610.0
   ],
   "backtestByModel": {
     "Lag-Informed Regression": [
@@ -13371,7 +13379,6 @@
       2022.814453125
     ],
     "Naive baseline": [
-      1689.0,
       1706.0,
       1705.0,
       1700.0,
@@ -13430,10 +13437,11 @@
       1649.0,
       1630.0,
       1601.0,
-      1592.0
+      1592.0,
+      1583.0
     ]
   },
-  "forecastDate": "2026-09-04",
+  "forecastDate": "2026-09-07",
   "dataAsOf": null,
   "inferenceAt": null
 }
