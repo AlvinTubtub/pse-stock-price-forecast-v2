@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-06T13:13:30.966325+08:00",
+  "generatedAt": "2026-09-13T14:23:34.418873+08:00",
   "forecastDate": "2026-09-07",
   "lastRunAt": "2026-09-04T13:41:16+00:00",
   "status": "ok",
@@ -11,16 +11,16 @@
       "r2": 0.8772
     },
     "ARIMA": {
-      "rmse": 4.4281,
-      "mae": 3.1313,
-      "mase": 1.5581,
+      "rmse": 4.4279,
+      "mae": 3.1311,
+      "mase": 1.5537,
       "r2": 0.9442
     },
     "LSTM": {
-      "rmse": 12.2251,
-      "mae": 7.1385,
-      "mase": 1.7138,
-      "r2": 0.7935
+      "rmse": 12.2231,
+      "mae": 7.1374,
+      "mase": 1.7124,
+      "r2": 0.7944
     },
     "Naive baseline": {
       "rmse": 4.4475,
@@ -108,10 +108,10 @@
           "ljung_box_pvalue": "0.9991"
         },
         "lstm": {
-          "rmse": "1.9840",
-          "mae": "1.4517",
-          "mase": "1.7757",
-          "r2": "0.5918"
+          "rmse": "1.9534",
+          "mae": "1.4348",
+          "mase": "1.7550",
+          "r2": "0.6043"
         },
         "naive": {
           "rmse": "1.1659",
@@ -401,11 +401,11 @@
           "r2": "0.9589"
         },
         "arima": {
-          "rmse": "0.5541",
-          "mae": "0.4168",
-          "mase": "7.7608",
-          "r2": "0.9597",
-          "ljung_box_pvalue": "0.0004"
+          "rmse": "0.5514",
+          "mae": "0.4132",
+          "mase": "7.6935",
+          "r2": "0.9600",
+          "ljung_box_pvalue": "0.2274"
         },
         "lstm": {
           "rmse": "0.5460",
@@ -435,7 +435,7 @@
           "mae": "0.1122",
           "mase": "1.2312",
           "r2": "0.9412",
-          "ljung_box_pvalue": "0.8744"
+          "ljung_box_pvalue": "0.8745"
         },
         "lstm": {
           "rmse": "0.1542",
@@ -516,257 +516,257 @@
     "diebold_mariano": {
       "ALI": {
         "arima vs lstm": {
-          "dm_statistic": -3.025261193069587,
-          "holm_p_value": 0.008263353966037057,
-          "p_value": 0.0027544513220123523
+          "dm_statistic": -3.0252709024858713,
+          "holm_p_value": 0.008263098548993542,
+          "p_value": 0.002754366182997847
         },
         "lag_reg vs arima": {
-          "dm_statistic": 0.9545472803503394,
-          "holm_p_value": 0.3407671258698779,
-          "p_value": 0.3407671258698779
+          "dm_statistic": 0.9561979226822046,
+          "holm_p_value": 0.33993441537862856,
+          "p_value": 0.33993441537862856
         },
         "lag_reg vs lstm": {
-          "dm_statistic": -3.019330505136666,
-          "holm_p_value": 0.008263353966037057,
-          "p_value": 0.0028069101339174285
+          "dm_statistic": -3.019329842756176,
+          "holm_p_value": 0.008263098548993542,
+          "p_value": 0.0028069160438140006
         }
       },
       "APX": {
         "arima vs lstm": {
-          "dm_statistic": 0.38247582325872376,
+          "dm_statistic": 0.281230985055181,
           "holm_p_value": 1.0,
-          "p_value": 0.7024469475692852
+          "p_value": 0.7787755522821636
         },
         "lag_reg vs arima": {
-          "dm_statistic": -1.5285439102335843,
-          "holm_p_value": 0.3830832848354886,
-          "p_value": 0.1276944282784962
+          "dm_statistic": -1.061289018761767,
+          "holm_p_value": 0.8688761328379808,
+          "p_value": 0.2896253776126603
         },
         "lag_reg vs lstm": {
-          "dm_statistic": 0.04134308038828356,
+          "dm_statistic": 0.04134306020675355,
           "holm_p_value": 1.0,
-          "p_value": 0.9670567619953756
+          "p_value": 0.9670567780673436
         }
       },
       "BPI": {
         "arima vs lstm": {
-          "dm_statistic": -2.50508154991706,
-          "holm_p_value": 0.03871847604956136,
-          "p_value": 0.012906158683187119
+          "dm_statistic": -2.5050815761053182,
+          "holm_p_value": 0.03871847325747679,
+          "p_value": 0.012906157752492264
         },
         "lag_reg vs arima": {
-          "dm_statistic": 0.577141095058875,
-          "holm_p_value": 0.5643851217921094,
-          "p_value": 0.5643851217921094
+          "dm_statistic": 0.5771410519227613,
+          "holm_p_value": 0.5643851508823761,
+          "p_value": 0.5643851508823761
         },
         "lag_reg vs lstm": {
-          "dm_statistic": -2.4958848602137573,
-          "holm_p_value": 0.03871847604956136,
-          "p_value": 0.013236704192254978
+          "dm_statistic": -2.4958848866707206,
+          "holm_p_value": 0.03871847325747679,
+          "p_value": 0.013236703230609992
         }
       },
       "GLO": {
         "arima vs lstm": {
-          "dm_statistic": -3.2791656188822613,
-          "holm_p_value": 0.003591377406924723,
-          "p_value": 0.0011975974958255975
+          "dm_statistic": -3.2791655873951018,
+          "holm_p_value": 0.00359137792770281,
+          "p_value": 0.0011975976235965025
         },
         "lag_reg vs arima": {
-          "dm_statistic": -1.853460373773507,
-          "holm_p_value": 0.06505915865723755,
-          "p_value": 0.06505915865723755
+          "dm_statistic": -1.8534595194137404,
+          "holm_p_value": 0.06505928150962426,
+          "p_value": 0.06505928150962426
         },
         "lag_reg vs lstm": {
-          "dm_statistic": -3.279281881697078,
-          "holm_p_value": 0.003591377406924723,
-          "p_value": 0.001197125802308241
+          "dm_statistic": -3.2792818389022083,
+          "holm_p_value": 0.00359137792770281,
+          "p_value": 0.0011971259759009367
         }
       },
       "ICT": {
         "arima vs lstm": {
-          "dm_statistic": -0.7688879296088982,
-          "holm_p_value": 0.4427158212487028,
-          "p_value": 0.4427158212487028
+          "dm_statistic": -0.7688899983792704,
+          "holm_p_value": 0.4427145953678955,
+          "p_value": 0.4427145953678955
         },
         "lag_reg vs arima": {
-          "dm_statistic": 2.7435855008073853,
-          "holm_p_value": 0.01960803094414021,
-          "p_value": 0.006536010314713403
+          "dm_statistic": 2.743585500806817,
+          "holm_p_value": 0.01960803094417285,
+          "p_value": 0.006536010314724283
         },
         "lag_reg vs lstm": {
-          "dm_statistic": 2.743404424087855,
-          "holm_p_value": 0.01960803094414021,
-          "p_value": 0.0065395044040628125
+          "dm_statistic": 2.743404422637107,
+          "holm_p_value": 0.01960803094417285,
+          "p_value": 0.006539504432063303
         }
       },
       "JFC": {
         "arima vs lstm": {
-          "dm_statistic": -3.2342974926121064,
-          "holm_p_value": 0.004139453120460157,
-          "p_value": 0.0013908477631778826
+          "dm_statistic": -3.2342974955681885,
+          "holm_p_value": 0.004139453066555943,
+          "p_value": 0.0013908477493884686
         },
         "lag_reg vs arima": {
-          "dm_statistic": -0.8030906008358324,
-          "holm_p_value": 0.4227169808376523,
-          "p_value": 0.4227169808376523
+          "dm_statistic": -0.8030906256686495,
+          "holm_p_value": 0.4227169665135093,
+          "p_value": 0.4227169665135093
         },
         "lag_reg vs lstm": {
-          "dm_statistic": -3.2366708062931413,
-          "holm_p_value": 0.004139453120460157,
-          "p_value": 0.0013798177068200523
+          "dm_statistic": -3.236670810173623,
+          "holm_p_value": 0.004139453066555943,
+          "p_value": 0.0013798176888519809
         }
       },
       "MBT": {
         "arima vs lstm": {
-          "dm_statistic": -3.158305590342384,
-          "holm_p_value": 0.004615445579803978,
-          "p_value": 0.0017930602828131192
+          "dm_statistic": -3.1490666659508215,
+          "holm_p_value": 0.004726903000699334,
+          "p_value": 0.0018483427136601893
         },
         "lag_reg vs arima": {
-          "dm_statistic": -1.253729189232056,
-          "holm_p_value": 0.21117574302162523,
-          "p_value": 0.21117574302162523
+          "dm_statistic": -1.25372918906894,
+          "holm_p_value": 0.21117574308082898,
+          "p_value": 0.21117574308082898
         },
         "lag_reg vs lstm": {
-          "dm_statistic": -3.2045783692350653,
-          "holm_p_value": 0.004615445579803978,
-          "p_value": 0.0015384818599346595
+          "dm_statistic": -3.1974020959552822,
+          "holm_p_value": 0.004726903000699334,
+          "p_value": 0.0015756343335664447
         }
       },
       "MEG": {
         "arima vs lstm": {
-          "dm_statistic": 0.049614147275910084,
+          "dm_statistic": 0.049629212171782455,
           "holm_p_value": 1.0,
-          "p_value": 0.9604711374229864
+          "p_value": 0.9604591447249775
         },
         "lag_reg vs arima": {
-          "dm_statistic": -0.029863338924625664,
+          "dm_statistic": -0.03197347849955348,
           "holm_p_value": 1.0,
-          "p_value": 0.9762008624618101
+          "p_value": 0.9745197749246337
         },
         "lag_reg vs lstm": {
-          "dm_statistic": 0.04945895127575887,
+          "dm_statistic": 0.04945983604972864,
           "holm_p_value": 1.0,
-          "p_value": 0.9605946846857258
+          "p_value": 0.9605939803388273
         }
       },
       "MER": {
         "arima vs lstm": {
-          "dm_statistic": -2.84112827898952,
-          "holm_p_value": 0.012725214426982934,
-          "p_value": 0.004886670797358494
+          "dm_statistic": -2.8411285212685455,
+          "holm_p_value": 0.012725205153103936,
+          "p_value": 0.004886667208973794
         },
         "lag_reg vs arima": {
-          "dm_statistic": -1.595785553721163,
-          "holm_p_value": 0.1118692369188723,
-          "p_value": 0.1118692369188723
+          "dm_statistic": -1.5957855977573052,
+          "holm_p_value": 0.11186922707994329,
+          "p_value": 0.11186922707994329
         },
         "lag_reg vs lstm": {
-          "dm_statistic": -2.887534363821146,
-          "holm_p_value": 0.012725214426982934,
-          "p_value": 0.004241738142327645
+          "dm_statistic": -2.8875346012799357,
+          "holm_p_value": 0.012725205153103936,
+          "p_value": 0.004241735051034645
         }
       },
       "NIKL": {
         "arima vs lstm": {
-          "dm_statistic": 0.08221402540059905,
+          "dm_statistic": 0.082210825057349,
           "holm_p_value": 1.0,
-          "p_value": 0.934545911701494
+          "p_value": 0.9345484538719222
         },
         "lag_reg vs arima": {
-          "dm_statistic": 0.25657417413013583,
+          "dm_statistic": 0.2565419685647987,
           "holm_p_value": 1.0,
-          "p_value": 0.7977300988659644
+          "p_value": 0.7977549337126164
         },
         "lag_reg vs lstm": {
-          "dm_statistic": 0.09935219369826892,
+          "dm_statistic": 0.09935197734594799,
           "holm_p_value": 1.0,
-          "p_value": 0.9209426234067166
+          "p_value": 0.9209427949963636
         }
       },
       "PGOLD": {
         "arima vs lstm": {
-          "dm_statistic": -1.0117398401277706,
-          "holm_p_value": 0.938056876724267,
-          "p_value": 0.31268562557475565
+          "dm_statistic": -1.0117400570433657,
+          "holm_p_value": 0.9380565661477265,
+          "p_value": 0.31268552204924216
         },
         "lag_reg vs arima": {
           "dm_statistic": 0.43422817600492486,
-          "holm_p_value": 0.938056876724267,
+          "holm_p_value": 0.9380565661477265,
           "p_value": 0.664514503746743
         },
         "lag_reg vs lstm": {
-          "dm_statistic": -0.9949913747350487,
-          "holm_p_value": 0.938056876724267,
-          "p_value": 0.32074675476281267
+          "dm_statistic": -0.9949916144141839,
+          "holm_p_value": 0.9380565661477265,
+          "p_value": 0.3207466384346467
         }
       },
       "SCC": {
         "arima vs lstm": {
-          "dm_statistic": -0.4092136285034552,
+          "dm_statistic": -0.4092137140007365,
           "holm_p_value": 1.0,
-          "p_value": 0.6827478460744949
+          "p_value": 0.6827477834219624
         },
         "lag_reg vs arima": {
-          "dm_statistic": 0.4112310622135058,
+          "dm_statistic": 0.41123106076833704,
           "holm_p_value": 1.0,
-          "p_value": 0.6812700808856187
+          "p_value": 0.6812700819437612
         },
         "lag_reg vs lstm": {
-          "dm_statistic": -0.39523079045897147,
+          "dm_statistic": -0.39523087734830903,
           "holm_p_value": 1.0,
-          "p_value": 0.6930236277795272
+          "p_value": 0.6930235637465203
         }
       },
       "SECB": {
         "arima vs lstm": {
-          "dm_statistic": -2.733104936006976,
-          "holm_p_value": 0.01988220142926056,
-          "p_value": 0.006747058904368997
+          "dm_statistic": -2.7331133875821463,
+          "holm_p_value": 0.019882190600557292,
+          "p_value": 0.006746891157734858
         },
         "lag_reg vs arima": {
-          "dm_statistic": -0.5431951645434888,
-          "holm_p_value": 0.5875059521478616,
-          "p_value": 0.5875059521478616
+          "dm_statistic": -0.5427971206363018,
+          "holm_p_value": 0.5877795785510487,
+          "p_value": 0.5877795785510487
         },
         "lag_reg vs lstm": {
-          "dm_statistic": -2.739182526910863,
-          "holm_p_value": 0.01988220142926056,
-          "p_value": 0.006627400476420187
+          "dm_statistic": -2.7391827117375187,
+          "holm_p_value": 0.019882190600557292,
+          "p_value": 0.006627396866852431
         }
       },
       "SHLPH": {
         "arima vs lstm": {
-          "dm_statistic": -2.33550297578643,
-          "holm_p_value": 0.061025788766194466,
-          "p_value": 0.02034192958873149
+          "dm_statistic": -2.335501456843889,
+          "holm_p_value": 0.061026030916219165,
+          "p_value": 0.02034201030540639
         },
         "lag_reg vs arima": {
-          "dm_statistic": 0.6133021025568054,
-          "holm_p_value": 0.5402573868153651,
-          "p_value": 0.5402573868153651
+          "dm_statistic": 0.6133120151629363,
+          "holm_p_value": 0.540250844666351,
+          "p_value": 0.540250844666351
         },
         "lag_reg vs lstm": {
-          "dm_statistic": -2.236404859703631,
-          "holm_p_value": 0.061025788766194466,
-          "p_value": 0.026244759839136655
+          "dm_statistic": -2.236403547687253,
+          "holm_p_value": 0.061026030916219165,
+          "p_value": 0.026244846944958766
         }
       },
       "SMPH": {
         "arima vs lstm": {
-          "dm_statistic": -3.471781273077092,
-          "holm_p_value": 0.0018429358262121998,
-          "p_value": 0.0006143119420707333
+          "dm_statistic": -3.4717618064229354,
+          "holm_p_value": 0.001843062937806117,
+          "p_value": 0.000614354312602039
         },
         "lag_reg vs arima": {
-          "dm_statistic": 0.530801342459994,
-          "holm_p_value": 0.5960534916534419,
-          "p_value": 0.5960534916534419
+          "dm_statistic": 0.5308012789047067,
+          "holm_p_value": 0.5960535356309618,
+          "p_value": 0.5960535356309618
         },
         "lag_reg vs lstm": {
-          "dm_statistic": -3.4623810414253677,
-          "holm_p_value": 0.0018429358262121998,
-          "p_value": 0.0006350936561776432
+          "dm_statistic": -3.462361329937986,
+          "holm_p_value": 0.001843062937806117,
+          "p_value": 0.0006351379170503879
         }
       }
     },
@@ -783,9 +783,9 @@
         "statistic": 2.0
       },
       "lag_reg vs arima": {
-        "holm_p_value": 0.5320471843202862,
-        "p_value": 0.5320471843202862,
-        "statistic": 49.0
+        "holm_p_value": 0.5994873046875,
+        "p_value": 0.5994873046875,
+        "statistic": 50.0
       },
       "lag_reg vs lstm": {
         "holm_p_value": 0.0361328125,
